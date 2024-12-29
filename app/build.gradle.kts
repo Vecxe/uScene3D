@@ -13,11 +13,11 @@ tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach 
 }
 
 android {
-  namespace = "org.robok.engine.feature.scene"
+  namespace = "org.robok.engine"
   compileSdk = 33
     
   defaultConfig {
-    applicationId = "org.robok.engine.feature.scene"
+    applicationId = "org.robok.engine"
     minSdk = 26
     targetSdk = 33
     versionCode = 1
@@ -62,12 +62,5 @@ dependencies {
   implementation("androidx.appcompat:appcompat:1.6.1")
   implementation("androidx.fragment:fragment-ktx:1.6.1")
   
-  implementation("com.badlogicgames.gdx:gdx:1.9.14")
-  implementation("com.badlogicgames.gdx:gdx-backend-android:1.9.14")
-  implementation("com.badlogicgames.gdx:gdx-platform:1.9.14:natives-armeabi")
-  implementation("com.badlogicgames.gdx:gdx-platform:1.9.14:natives-armeabi-v7a")
-  implementation("com.badlogicgames.gdx:gdx-platform:1.9.14:natives-x86")
-  implementation("com.badlogicgames.gdx:gdx-platform:1.9.14:natives-x86_64")
-    
-  implementation("com.github.mgsx-dev.gdx-gltf:gltf:2.2.1")
+  implementation(project(":feature:scene"))
 }
