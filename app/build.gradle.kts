@@ -62,5 +62,12 @@ dependencies {
   implementation("androidx.appcompat:appcompat:1.6.1")
   implementation("androidx.fragment:fragment-ktx:1.6.1")
   
+  implementation("com.badlogicgames.gdx:gdx:1.9.14")
+  implementation("com.badlogicgames.gdx:gdx-backend-android:1.9.14")
+  implementation("com.badlogicgames.gdx:gdx-platform:1.9.14:natives-armeabi")
+  implementation("com.badlogicgames.gdx:gdx-platform:1.9.14:natives-armeabi-v7a")
+  implementation("com.badlogicgames.gdx:gdx-platform:1.9.14:natives-x86")
+  implementation("com.badlogicgames.gdx:gdx-platform:1.9.14:natives-x86_64")
+  
   implementation(project(":feature:scene"))
 }
