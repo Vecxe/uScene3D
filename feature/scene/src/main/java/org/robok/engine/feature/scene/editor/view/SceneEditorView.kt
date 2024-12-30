@@ -55,7 +55,7 @@ class SceneEditorView : ApplicationAdapter() {
   private lateinit var cameraInputController2: CameraInputController2
   private lateinit var drawingRenderer: DrawingRenderer
   private lateinit var modelBatch: ModelBatch
-  private var angle = 0f
+  private var progress = 0f
 
   var command: String? = null
 
@@ -70,6 +70,8 @@ class SceneEditorView : ApplicationAdapter() {
     cameraState.width = Gdx.graphics.width.toFloat()
     cameraState.height = Gdx.graphics.height.toFloat()
     camera = PerspectiveCamera(cameraState.fov, cameraState.width, cameraState.height)
+    camera.position.set(20f, 20f, 20f)
+    camera.lookAt(0f, 0f, 0f)
     camera.near = 1f
     camera.far = 300f
   }
@@ -119,11 +121,12 @@ class SceneEditorView : ApplicationAdapter() {
     Gdx.gl.glEnable(GL30.GL_DEPTH_TEST)
 
     drawingRenderer.start(camera)
-    angle += 90f * Gdx.graphics.deltaTime
-
+    
+    
     cameraInputController2.updateRenderer(drawingRenderer.shapeRenderer)
-    drawingRenderer.drawGrid3DWithVerticalLines2(200f, 200f, 1f, 0.1f, 1f, 100f)
-    drawingRenderer.drawRotatedSquare(0f, 6f, 4f, angle)
+    
+    drawingRenderer.gridWithCircleAnimation(200f, 200f, 1f, 0.1f)
+    drawingRenderer.drawRotatedSquare(0f, 4.5f, 2f, true)
     drawingRenderer.end()
 
     renderObjects()
