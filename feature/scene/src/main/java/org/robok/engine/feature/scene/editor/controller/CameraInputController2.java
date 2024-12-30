@@ -160,7 +160,7 @@ public class CameraInputController2 extends GestureDetector {
       if (count == 2) {
         object = new CameraInputController2.Object(controller.camera);
         controller.sceneObject = object.getObjectFromTap(x, y);
-        if (controller.sceneObject != null) animarCameraAteObjeto(controller.sceneObject, 5);
+        if (controller.sceneObject != null) animarCameraAteObjeto(controller.sceneObject, 2);
 
         controller.ammount = true;
       }
@@ -269,9 +269,10 @@ public static void animarCameraAteObjeto(SceneObject sceneObject, float duracaoS
 
     // Obtém a posição alvo do objeto
     Vector3 posicaoAlvo = new Vector3();
+            
     sceneObject.getModelInstance().transform.getTranslation(posicaoAlvo);
-
-    // Calcula a posição final da câmera (levemente afastada)
+   // posicaoAlvo.z = 0f;
+    // Define a posição final da câmera (levemente afastada do alvo)
     float distancia = 10f;
     Vector3 posicaoFinal = new Vector3(
         posicaoAlvo.x + distancia,
@@ -279,32 +280,34 @@ public static void animarCameraAteObjeto(SceneObject sceneObject, float duracaoS
         posicaoAlvo.z + distancia
     );
 
-    // Configura o tempo total da animação e o tempo decorrido
+    // Variável para rastrear o tempo decorrido
     final float[] tempoDecorrido = {0f};
-    final float intervaloFrame = 1 / 60f; // Assume 60 FPS
-
+            
+     controller.target.set(posicaoAlvo);       
     // Função de atualização para animação
     Runnable atualizarCamera = new Runnable() {
         @Override
         public void run() {
-            // Incrementa o tempo decorrido
-            tempoDecorrido[0] += intervaloFrame;
+            // Incrementa o tempo decorrido com o deltaTime
+            float deltaTime = Gdx.graphics.getDeltaTime();
+            tempoDecorrido[0] += deltaTime;
 
-            // Calcula o progresso da animação (0.0 a 1.0)
+            // Calcula o progresso da animação (de 0.0 a 1.0)
             float progresso = Math.min(tempoDecorrido[0] / duracaoSegundos, 1.0f);
 
             // Interpola a posição da câmera usando LERP
-            controller.camera.position.lerp(posicaoFinal, progresso);
+            controller.camera.position.set(posicaoInicial).lerp(posicaoFinal, progresso);
 
-            // Atualiza o alvo da câmera
+            // Configura a câmera para olhar para o alvo
             controller.camera.lookAt(posicaoAlvo);
 
+             // Ajusta o vetor "up" da câmera para garantir que ela esteja orientada corretamente
+            controller.camera.up.set(0, 1, 0);        
             // Atualiza a câmera
             controller.camera.update();
 
-            // Verifica se a animação terminou
+            // Continua animando enquanto o progresso for menor que 1
             if (progresso < 1.0f) {
-                // Continua atualizando no próximo frame
                 Gdx.app.postRunnable(this);
             }
         }
