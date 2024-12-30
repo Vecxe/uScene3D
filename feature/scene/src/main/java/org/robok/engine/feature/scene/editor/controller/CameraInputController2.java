@@ -160,7 +160,7 @@ public class CameraInputController2 extends GestureDetector {
       if (count == 2) {
         object = new CameraInputController2.Object(controller.camera);
         controller.sceneObject = object.getObjectFromTap(x, y);
-        if (controller.sceneObject != null) focarCameraNoObject(controller.sceneObject);
+        if (controller.sceneObject != null) animarCameraAteObjeto(controller.sceneObject, 5);
 
         controller.ammount = true;
       }
@@ -262,6 +262,57 @@ public class CameraInputController2 extends GestureDetector {
     	return false;
     }*/
 
+     // Método que anima a câmera até o objeto
+public static void animarCameraAteObjeto(SceneObject sceneObject, float duracaoSegundos) {
+    // Obtém a posição inicial da câmera
+    Vector3 posicaoInicial = new Vector3(controller.camera.position);
+
+    // Obtém a posição alvo do objeto
+    Vector3 posicaoAlvo = new Vector3();
+    sceneObject.getModelInstance().transform.getTranslation(posicaoAlvo);
+
+    // Calcula a posição final da câmera (levemente afastada)
+    float distancia = 10f;
+    Vector3 posicaoFinal = new Vector3(
+        posicaoAlvo.x + distancia,
+        posicaoAlvo.y + distancia,
+        posicaoAlvo.z + distancia
+    );
+
+    // Configura o tempo total da animação e o tempo decorrido
+    final float[] tempoDecorrido = {0f};
+    final float intervaloFrame = 1 / 60f; // Assume 60 FPS
+
+    // Função de atualização para animação
+    Runnable atualizarCamera = new Runnable() {
+        @Override
+        public void run() {
+            // Incrementa o tempo decorrido
+            tempoDecorrido[0] += intervaloFrame;
+
+            // Calcula o progresso da animação (0.0 a 1.0)
+            float progresso = Math.min(tempoDecorrido[0] / duracaoSegundos, 1.0f);
+
+            // Interpola a posição da câmera usando LERP
+            controller.camera.position.lerp(posicaoFinal, progresso);
+
+            // Atualiza o alvo da câmera
+            controller.camera.lookAt(posicaoAlvo);
+
+            // Atualiza a câmera
+            controller.camera.update();
+
+            // Verifica se a animação terminou
+            if (progresso < 1.0f) {
+                // Continua atualizando no próximo frame
+                Gdx.app.postRunnable(this);
+            }
+        }
+    };
+
+    // Inicia a animação
+    Gdx.app.postRunnable(atualizarCamera);
+}
     public static void focarCameraNoObject(SceneObject sceneObject) {
       // Supondo que getModelInstance() retorne um objeto do tipo ModelInstance
       ModelInstance modelInstance = sceneObject.getModelInstance();
