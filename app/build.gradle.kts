@@ -17,7 +17,7 @@ android {
   compileSdk = 33
     
   defaultConfig {
-    applicationId = "org.robok.engine"
+    applicationId = "org.robok.engine.scene"
     minSdk = 26
     targetSdk = 33
     versionCode = 1
