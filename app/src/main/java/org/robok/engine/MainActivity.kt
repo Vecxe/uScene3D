@@ -30,38 +30,34 @@ import org.robok.engine.feature.scene.editor.fragment.LibGDXFragment
 
 class MainActivity : AppCompatActivity(), AndroidFragmentApplication.Callbacks {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        val frame = FrameLayout(this).apply {
-            id = View.generateViewId()
-        }
+  override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
+    val frame = FrameLayout(this).apply { id = View.generateViewId() }
 
-        frame.post {
-            val fragment = LibGDXFragment()
-            supportFragmentManager.commit {
-                replace(frame.id, fragment)
-            }
-        }
-
-        setContentView(frame)
-        hideSystemUI()
+    frame.post {
+      val fragment = LibGDXFragment()
+      supportFragmentManager.commit { replace(frame.id, fragment) }
     }
 
-    private fun hideSystemUI() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            window.setDecorFitsSystemWindows(false)
-            window.insetsController?.let { controller ->
-                controller.hide(WindowInsets.Type.statusBars() or WindowInsets.Type.navigationBars())
-                controller.systemBarsBehavior = WindowInsetsController.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
-            }
-        } else {
-            @Suppress("DEPRECATION")
-            window.decorView.systemUiVisibility =
-                View.SYSTEM_UI_FLAG_HIDE_NAVIGATION or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
-        }
-    }
+    setContentView(frame)
+    hideSystemUI()
+  }
 
-    override fun exit() {
-        // TODO: Implement this method
+  private fun hideSystemUI() {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+      window.setDecorFitsSystemWindows(false)
+      window.insetsController?.let { controller ->
+        controller.hide(WindowInsets.Type.statusBars() or WindowInsets.Type.navigationBars())
+        controller.systemBarsBehavior = WindowInsetsController.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
+      }
+    } else {
+      @Suppress("DEPRECATION")
+      window.decorView.systemUiVisibility =
+        View.SYSTEM_UI_FLAG_HIDE_NAVIGATION or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
     }
+  }
+
+  override fun exit() {
+    // TODO: Implement this method
+  }
 }

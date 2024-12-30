@@ -27,22 +27,23 @@ import org.robok.engine.feature.scene.editor.view.SceneEditorView
 
 class LibGDXFragment : AndroidFragmentApplication() {
 
-    private lateinit var model3DView: SceneEditorView
+  private lateinit var model3DView: SceneEditorView
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        val config = AndroidApplicationConfiguration().apply {
-            useGL30 = true // Configuração GL30 conforme necessário
-        }
+  override fun onCreateView(
+    inflater: LayoutInflater,
+    container: ViewGroup?,
+    savedInstanceState: Bundle?,
+  ): View {
+    val config =
+      AndroidApplicationConfiguration().apply {
+        useGL30 = true // Configuração GL30 conforme necessário
+      }
 
-        model3DView = SceneEditorView()
-        return initializeForView(model3DView, config)
-    }
+    model3DView = SceneEditorView()
+    return initializeForView(model3DView, config)
+  }
 
-    fun getModel3DView(): SceneEditorView {
-        return model3DView
-    }
+  fun getModel3DView(): SceneEditorView {
+    return model3DView
+  }
 }

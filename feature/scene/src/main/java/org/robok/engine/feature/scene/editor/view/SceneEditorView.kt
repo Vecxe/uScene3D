@@ -41,11 +41,7 @@ class SceneEditorView : ApplicationAdapter() {
     @JvmStatic val sceneState = SceneState()
   }
 
-  data class CameraState(
-    var fov: Float = 60f,
-    var width: Float = 0f,
-    var height: Float = 0f,
-  )
+  data class CameraState(var fov: Float = 60f, var width: Float = 0f, var height: Float = 0f)
 
   data class SceneState(var objects: MutableList<SceneObject> = mutableListOf())
 
@@ -102,7 +98,7 @@ class SceneEditorView : ApplicationAdapter() {
     cameraInputController2 = CameraInputController2(camera)
     Gdx.input.setInputProcessor(cameraInputController2)
   }
-  
+
   override fun create() {
     init()
     drawingRenderer = DrawingRenderer()
