@@ -98,7 +98,7 @@ public class CameraInputController2 extends GestureDetector {
   protected boolean controlsInverted;
 
   /** The camera. */
-  private static Camera camera;
+  private Camera camera;
 
   /** The current (first) button being pressed. */
   protected int button = -1;
@@ -116,7 +116,7 @@ public class CameraInputController2 extends GestureDetector {
   public SceneObject sceneObject;
 
   protected static class CameraGestureListener extends GestureAdapter {
-    public static CameraInputController2 controller;
+    public CameraInputController2 controller;
     private float previousZoom;
     private Vector2 initialPointer1, initialPointer2;
     private Vector2 currentPointer1, currentPointer2;
@@ -160,7 +160,7 @@ public class CameraInputController2 extends GestureDetector {
       if (count == 2) {
         object = new CameraInputController2.Object(controller.camera);
         controller.sceneObject = object.getObjectFromTap(x, y);
-        if (controller.sceneObject != null) animarCameraAteObjeto(controller.sceneObject, 2);
+        if (controller.sceneObject != null) focusCameraOnObjectWithAnimation(controller.sceneObject, 2);
 
         controller.ammount = true;
       }
@@ -188,8 +188,8 @@ public class CameraInputController2 extends GestureDetector {
       float amount = newZoom - previousZoom;
       previousZoom = newZoom;
 
-      // Define um limiar para considerar o movimento como zoom
-      float zoomThreshold = 8f; // Ajuste este valor conforme necessário
+      // Sets a threshold to consider movement as zoom
+      float zoomThreshold = 8f; // Adjust this value as needed
 
       if (Math.abs(amount) > zoomThreshold) {
         // Zoom detectado
@@ -197,7 +197,7 @@ public class CameraInputController2 extends GestureDetector {
         float w = Gdx.graphics.getWidth(), h = Gdx.graphics.getHeight();
         return controller.pinchZoom(amount / ((w > h) ? h : w));
       } else {
-        // Movimento insignificante, provavelmente pan
+        // Insignificant movement, probably pan
         isZoom = false;
         return false;
       }
@@ -211,17 +211,17 @@ public class CameraInputController2 extends GestureDetector {
       if (previousZoom == 0) {
         this.initialPointer1 = initialPointer1.cpy();
         this.initialPointer2 = initialPointer2.cpy();
-        previousZoom = 1; // Indica que o gesto de pinch começou
+        previousZoom = 1; // Indicates that the pinch gesture has started
       }
 
-      // Calcula o delta entre a posição inicial e a atual para os dois dedos
+      // Calculates the delta between the initial and current position for both fingers
       Vector2 deltaPointer1 = pointer1.cpy().sub(initialPointer1);
       Vector2 deltaPointer2 = pointer2.cpy().sub(initialPointer2);
 
-      // Calcula o movimento médio (average) dos dois dedos
+      // Calculates the average movement (average) of the two fingers
       Vector2 averageDelta = deltaPointer1.cpy().add(deltaPointer2).scl(0.5f);
 
-      // Calcula o movimento do meio da tela (midpoint) entre os dois dedos
+      // Calculates the movement of the middle of the screen (midpoint) between the two fingers
       Vector2 initialMidpoint =
           new Vector2(
               (initialPointer1.x + initialPointer2.x) / 2,
@@ -229,13 +229,13 @@ public class CameraInputController2 extends GestureDetector {
       Vector2 currentMidpoint =
           new Vector2((pointer1.x + pointer2.x) / 2, (pointer1.y + pointer2.y) / 2);
 
-      // Calcula o delta de movimento do midpoint
+      // Calculates the midpoint movement delta
       Vector2 movementDelta = currentMidpoint.sub(initialMidpoint);
 
-      // Diminui a velocidade de movimento da câmera
-      float sensitivity = 0.00004f; // Ajuste a sensibilidade conforme necessário
+      // Decreases camera movement speed
+      float sensitivity = 0.00004f; // ajust sensitivity if need
 
-      // Aplica o movimento proporcional à câmera com sensibilidade ajustada
+      // Applies proportional movement to the camera with adjusted sensitivity
       Vector3 right = controller.camera.direction.cpy().crs(controller.camera.up).nor();
       Vector3 up = controller.camera.up.cpy();
       Vector3 cameraMovement =
@@ -244,12 +244,12 @@ public class CameraInputController2 extends GestureDetector {
               .add(up.scl(movementDelta.y * sensitivity * controller.translateUnits));
       controller.camera.translate(cameraMovement);
 
-      // Atualiza o alvo da câmera se necessário
+      // Update camera target if necessary
       if (controller.translateTarget) {
         controller.target.add(cameraMovement);
       }
 
-      // Atualiza a câmera
+      // Update camerr
       if (controller.autoUpdate) {
         controller.camera.update();
       }
@@ -257,96 +257,90 @@ public class CameraInputController2 extends GestureDetector {
       return true;
     }
 
-    /*	@Override
-    public boolean pinch (Vector2 initialPointer1, Vector2 initialPointer2, Vector2 pointer1, Vector2 pointer2) {
-    	return false;
-    }*/
+     // Method that animates the camera to the object
+private void focusCameraOnObjectWithAnimation(SceneObject sceneObject, float durationSeconds) {
+    // Get the initial position of the camera
+    Vector3 initialPosition = new Vector3(controller.camera.position);
 
-     // Método que anima a câmera até o objeto
-public static void animarCameraAteObjeto(SceneObject sceneObject, float duracaoSegundos) {
-    // Obtém a posição inicial da câmera
-    Vector3 posicaoInicial = new Vector3(controller.camera.position);
+    // Get the target position of the object
+    Vector3 targetPosition = new Vector3();
+    sceneObject.getModelInstance().transform.getTranslation(targetPosition);
+    // targetPosition.z = 0f;
 
-    // Obtém a posição alvo do objeto
-    Vector3 posicaoAlvo = new Vector3();
-            
-    sceneObject.getModelInstance().transform.getTranslation(posicaoAlvo);
-   // posicaoAlvo.z = 0f;
-    // Define a posição final da câmera (levemente afastada do alvo)
-    float distancia = 10f;
-    Vector3 posicaoFinal = new Vector3(
-        posicaoAlvo.x + distancia,
-        posicaoAlvo.y + distancia,
-        posicaoAlvo.z + distancia
+    // Define the final position of the camera (slightly offset from the target)
+    float distance = 10f;
+    Vector3 finalPosition = new Vector3(
+        targetPosition.x + distance,
+        targetPosition.y + distance,
+        targetPosition.z + distance
     );
 
-    // Variável para rastrear o tempo decorrido
-    final float[] tempoDecorrido = {0f};
+    // Variable to track elapsed time
+    final float[] elapsedTime = {0f};
             
-     controller.target.set(posicaoAlvo);       
-    // Função de atualização para animação
-    Runnable atualizarCamera = new Runnable() {
+    controller.target.set(targetPosition);     
+    // Update function for animation
+    Runnable updateCamera = new Runnable() {
         @Override
         public void run() {
-            // Incrementa o tempo decorrido com o deltaTime
+            // Increment elapsed time with deltaTime
             float deltaTime = Gdx.graphics.getDeltaTime();
-            tempoDecorrido[0] += deltaTime;
+            elapsedTime[0] += deltaTime;
+                    
+            // Calculate animation progress (from 0.0 to 1.0)
+            float progress = Math.min(elapsedTime[0] / durationSeconds, 1.0f);
 
-            // Calcula o progresso da animação (de 0.0 a 1.0)
-            float progresso = Math.min(tempoDecorrido[0] / duracaoSegundos, 1.0f);
+            // Interpolate the camera's position using LERP
+            controller.camera.position.set(initialPosition).lerp(finalPosition, progress);
 
-            // Interpola a posição da câmera usando LERP
-            controller.camera.position.set(posicaoInicial).lerp(posicaoFinal, progresso);
+            // Set the camera to look at the target
+            controller.camera.lookAt(targetPosition);
 
-            // Configura a câmera para olhar para o alvo
-            controller.camera.lookAt(posicaoAlvo);
-
-             // Ajusta o vetor "up" da câmera para garantir que ela esteja orientada corretamente
+            // Adjust the camera's "up" vector to ensure it is properly oriented
             controller.camera.up.set(0, 1, 0);        
-            // Atualiza a câmera
+            // Update the camera
             controller.camera.update();
 
-            // Continua animando enquanto o progresso for menor que 1
-            if (progresso < 1.0f) {
+            // Continue animating while progress is less than 1
+            if (progress < 1.0f) {
                 Gdx.app.postRunnable(this);
             }
         }
     };
 
-    // Inicia a animação
-    Gdx.app.postRunnable(atualizarCamera);
+    // Start the animation
+    Gdx.app.postRunnable(updateCamera);
 }
-    public static void focarCameraNoObject(SceneObject sceneObject) {
-      // Supondo que getModelInstance() retorne um objeto do tipo ModelInstance
+        
+    private void focusCameraOnObject(SceneObject sceneObject) {
       ModelInstance modelInstance = sceneObject.getModelInstance();
 
-      // ModelInstance contém uma matriz de transformação (transform), que podemos usar para obter a
-      // posição do objeto
+      // ModelInstance contains a transformation matrix (transform), which we can use to get the
+      // object's position
       Vector3 objectPosition = new Vector3();
       modelInstance.transform.getTranslation(objectPosition);
 
-      // Defina a distância desejada da câmera em relação ao objeto
+      // Set the desired distance of the camera relative to the object
       float distance = 10f;
 
-      // Define o ponto alvo para a câmera
+      // Set the target point for the camera
       controller.target.set(objectPosition);
 
-      // Posicione a câmera a uma certa distância do objeto no eixo Z (ou outro eixo se preferir)
+      // Position the camera at a certain distance from the object on the Z-axis (or another axis if preferred)
       controller.camera.position.set(
           objectPosition.x + distance, objectPosition.y + distance, objectPosition.z + distance);
 
-      // A câmera deve olhar para o objeto
+      // The camera should look at the object
       controller.camera.lookAt(objectPosition);
 
-      // Ajusta o vetor "up" da câmera para garantir que ela esteja orientada corretamente
+      // Adjust the camera's "up" vector to ensure it is properly oriented
       controller.camera.up.set(0, 1, 0);
 
-      // Atualize a câmera para aplicar as mudanças
+      // Update the camera to apply the changes
       controller.camera.update();
     }
-  }
-  ;
-
+  };
+    
   public static class Object {
     private Camera camera;
 
@@ -368,13 +362,13 @@ public static void animarCameraAteObjeto(SceneObject sceneObject, float duracaoS
       for (SceneObject scene : SceneEditorView.getSceneState().getObjects()) {
         BoundingBox bbox = new BoundingBox();
         scene.getModelInstance().calculateBoundingBox(bbox);
-        bbox.mul(scene.getModelInstance().transform); // Aplicar transformação
+        bbox.mul(scene.getModelInstance().transform); // Apply transformation
 
         Vector3 intersection = new Vector3();
         if (Intersector.intersectRayBounds(ray, bbox, intersection)) {
           float distance = ray.origin.dst(intersection);
 
-          if (distance < closestDistance + 0.01f) { // Tolerância
+          if (distance < closestDistance + 0.01f) { // Tolerancy
             closestDistance = distance;
             closestObject = scene;
           }
@@ -386,15 +380,15 @@ public static void animarCameraAteObjeto(SceneObject sceneObject, float duracaoS
     }
 
     private Ray getRayFromScreenCoordinates(Vector2 touchPos) {
-      // Cria vetores para os pontos perto e longe da tela
+      // Creates vectors for points near and far from the screen
       Vector3 nearPoint = new Vector3(touchPos.x, touchPos.y, 0);
       Vector3 farPoint = new Vector3(touchPos.x, touchPos.y, 1);
 
-      // Converte os pontos para o espaço do mundo
+      // Converts points to world space
       camera.unproject(nearPoint);
       camera.unproject(farPoint);
 
-      // Cria um raio a partir dos pontos
+      // Creates a radius from the points
       return new Ray(nearPoint, farPoint.sub(nearPoint).nor());
     }
   }
@@ -575,7 +569,7 @@ public static void animarCameraAteObjeto(SceneObject sceneObject, float duracaoS
   }
 
   // shapeRenderer
-  // Desenhar cubo detalhado
+  // draw cube
   private void drawCubeEdges2(
       ShapeRenderer shapeRenderer,
       float scaleX,
@@ -584,12 +578,12 @@ public static void animarCameraAteObjeto(SceneObject sceneObject, float duracaoS
       float centerX,
       float centerY,
       float centerZ) {
-    // Calcula os tamanhos no cubo
+    // Calculates the sizes in the cube
     float halfScaleX = scaleX / 2;
     float halfScaleY = scaleY / 2;
     float halfScaleZ = scaleZ / 2;
 
-    // Define os pontos do cubo com escalas e posição central
+    // Defines cube points with scales and center position
     float[][] points = {
       {centerX - halfScaleX, centerY - halfScaleY, centerZ - halfScaleZ},
       {centerX + halfScaleX, centerY - halfScaleY, centerZ - halfScaleZ},
@@ -602,7 +596,7 @@ public static void animarCameraAteObjeto(SceneObject sceneObject, float duracaoS
     };
 
     shapeRenderer.setColor(Color.WHITE);
-    // Desenha as arestas do cubo
+    // Draw the edges of the cube
     for (int i = 0; i < 4; i++) {
       shapeRenderer.line(
           points[i][0],
