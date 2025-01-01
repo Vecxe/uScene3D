@@ -24,7 +24,20 @@ android {
     versionName = "1.0"
     
     vectorDrawables.useSupportLibrary = true
+    
+    
+    
   }
+   
+    packagingOptions {
+        exclude("META-INF/INDEX.LIST") // Excluir INDEX.LIST
+        exclude("META-INF/ALIAS")
+        exclude("META-INF/DEPENDENCIES")
+        exclude("META-INF/LICENSE")
+        exclude("META-INF/LICENSE.txt")
+        exclude("META-INF/NOTICE")
+        exclude("META-INF/NOTICE.txt")
+    }
     
   compileOptions {
     sourceCompatibility = JavaVersion.VERSION_11
@@ -70,4 +83,6 @@ dependencies {
   implementation("com.badlogicgames.gdx:gdx-platform:1.9.14:natives-x86_64")
   
   implementation(project(":feature:scene"))
+  
+
 }

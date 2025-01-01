@@ -24,6 +24,8 @@ android {
     sourceCompatibility = JavaVersion.VERSION_11
     targetCompatibility = JavaVersion.VERSION_11
   }
+  
+
 }
 
 dependencies {
@@ -38,4 +40,9 @@ dependencies {
   implementation("com.badlogicgames.gdx:gdx-platform:1.9.14:natives-x86_64")
     
   implementation("com.github.mgsx-dev.gdx-gltf:gltf:2.2.1")
+  
+  implementation("org.lwjgl:lwjgl:3.3.1") // Núcleo do LWJGL
+    implementation("org.lwjgl:lwjgl-opengl:3.3.1") // OpenGL para trabalhar com texturas
+    implementation("org.lwjgl:lwjgl-stb:3.3.1") // STBImage para carregar imagens HDR
+    implementation("org.lwjgl:lwjgl-glfw:3.3.1") // GLFW, caso precise para o contexto de janela, pode ser útil no futuro
 }
