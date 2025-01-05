@@ -28,6 +28,10 @@ android {
     
     
   }
+  
+  packaging {
+    jniLibs.useLegacyPackaging = true
+  }
    
     packagingOptions {
         exclude("META-INF/INDEX.LIST") // Excluir INDEX.LIST

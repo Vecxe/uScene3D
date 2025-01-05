@@ -35,6 +35,8 @@ import org.robok.engine.feature.scene.editor.objects.ObjectCommand
 import org.robok.engine.feature.scene.editor.objects.ObjectsCreator
 import org.robok.engine.feature.scene.editor.objects.SceneObject
 
+import org.robok.engine.feature.scene.editor.hdri.HDRIToCubemapFaces
+
 class SceneEditorView : ApplicationAdapter() {
 
   companion object {
@@ -64,7 +66,16 @@ class SceneEditorView : ApplicationAdapter() {
     initSky()
     initSceneManager()
     initController()
+   // initHdri()
   }
+  
+  private fun initHdri(){
+    var hdriConverter: HDRIToCubemapFaces = HDRIToCubemapFaces()
+    val inputPath = "/storage/emulated/0/hdri/sky.hdr"
+    val outputPath= "/storage/emulated/0/hdri/output/"
+
+    hdriConverter.convert(inputPath, outputPath)
+}
 
   private fun initCamera() {
     cameraState.width = Gdx.graphics.width.toFloat()

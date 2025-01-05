@@ -12,20 +12,35 @@ tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach 
 }
 
 android {
-  namespace = "org.robok.engine.feature.scene"
-  compileSdk = 33
+    namespace = "org.robok.engine.feature.scene"
+    compileSdk = 33
 
-  defaultConfig {
-    minSdk = 26
-    vectorDrawables.useSupportLibrary = true
-  }
-    
-  compileOptions {
-    sourceCompatibility = JavaVersion.VERSION_11
-    targetCompatibility = JavaVersion.VERSION_11
-  }
-  
+    defaultConfig {
+        minSdk = 26
+        vectorDrawables.useSupportLibrary = true
 
+        ndk {
+            abiFilters += listOf("armeabi-v7a", "arm64-v8a", "x86", "x86_64")
+        }
+
+        externalNativeBuild {
+            cmake {
+                arguments += listOf("-DANDROID_STL=c++_shared")
+                cppFlags += "-std=c++17"
+            }
+        }
+    }
+
+    externalNativeBuild {
+        cmake {
+            path = file("src/main/cpp/CMakeLists.txt")
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
+    }
 }
 
 dependencies {
