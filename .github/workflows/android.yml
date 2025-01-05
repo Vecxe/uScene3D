@@ -1,7 +1,25 @@
+name: Android CI
+
+on:
+  push:
+    branches:
+      - '**'  # Aciona em qualquer push para qualquer branch
+    paths-ignore:
+      - '**/*.md'  # Ignora mudanças em arquivos markdown
+  pull_request:
+    branches:
+      - '**'  # Aciona em qualquer PR para qualquer branch
+    paths-ignore:
+      - '**/*.md'  # Ignora mudanças em arquivos markdown
+  workflow_dispatch:  # Permite disparar manualmente pelo GitHub UI
+
 jobs:
   build:
-    name: Build 
+    name: Build
     runs-on: ubuntu-latest
+
+    container:
+      image: google/android-sdk:latest
 
     steps:
       - name: Check out repository
