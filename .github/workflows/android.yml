@@ -28,7 +28,7 @@ jobs:
           cache: gradle
 
       - name: Install NDK
-        uses: android/actions/setup-android@v2
+        uses: actions/setup-android@v3 # Use a versão mais recente (v3)
         with:
           api-level: 33
           ndk-version: 25.2.9515345
