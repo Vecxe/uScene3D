@@ -16,6 +16,9 @@ jobs:
     name: Build 
     runs-on: ubuntu-latest
 
+    container:
+      image: ghcr.io/android/android-base:latest
+
     steps:
       # Checkout o repositório
       - name: Check out repository
@@ -29,30 +32,20 @@ jobs:
           distribution: 'oracle'
           cache: gradle
 
-      # Garantir permissão para o gradlew
-      - name: Grant execute permission for gradlew
-        run: chmod +x gradlew
-
-      # Validar o Gradle wrapper
-      - name: Validate Gradle wrapper
-        uses: gradle/actions/wrapper-validation@v4
-
-      # Instalar Android NDK e CMake
-      - name: Install Android NDK and CMake
+      # Aceitar Licenças e Instalar Ferramentas
+      - name: Accept licenses and install NDK and CMake
+        env:
+          ANDROID_HOME: /sdk
+          PATH: /sdk/cmdline-tools/latest/bin:/sdk/platform-tools:$PATH
         run: |
-          sudo apt-get update
-          sudo apt-get install -y ninja-build
-          yes | sdkmanager --install "ndk;25.1.8937393" "cmake;3.22.1"
           sdkmanager --licenses
-
-      # Configurar variáveis de ambiente para NDK e CMake
-      - name: Set environment variables
-        run: |
-          echo "export ANDROID_NDK_HOME=$ANDROID_SDK_ROOT/ndk/25.1.8937393" >> $GITHUB_ENV
-          echo "export CMAKE_HOME=$ANDROID_SDK_ROOT/cmake/3.22.1/bin" >> $GITHUB_ENV
+          sdkmanager --install "ndk;25.1.8937393" "cmake;3.22.1"
 
       # Construir APK de release
       - name: Build App Release
+        env:
+          ANDROID_HOME: /sdk
+          PATH: /sdk/cmdline-tools/latest/bin:/sdk/platform-tools:$PATH
         run: ./gradlew assembleRelease
 
       # Fazer upload do APK gerado
