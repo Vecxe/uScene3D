@@ -40,10 +40,12 @@ jobs:
           wget https://dl.google.com/android/repository/commandlinetools-linux-8512546_latest.zip
           unzip commandlinetools-linux-8512546_latest.zip -d $HOME/android-sdk
 
-          # Configurar variáveis de ambiente diretamente para o PATH da sessão atual
+          # Atualizar o PATH
           export ANDROID_HOME=$HOME/android-sdk
           export PATH=$ANDROID_HOME/cmdline-tools/latest/bin:$PATH
-          
+          echo "ANDROID_HOME=$ANDROID_HOME"
+          echo "PATH=$PATH"
+
           # Verificar se sdkmanager está disponível
           sdkmanager --version
 
