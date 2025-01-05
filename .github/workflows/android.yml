@@ -2,29 +2,26 @@ name: Android CI
 
 on:
   push:
-    branches:
-      - '**'  # Aciona em qualquer push para qualquer branch
+    branches: [ "**" ]
     paths-ignore:
-      - '**/*.md'  # Ignora mudanças em arquivos markdown
+      - '**/*.md'
   pull_request:
-    branches:
-      - '**'  # Aciona em qualquer PR para qualquer branch
+    branches: [ "**" ]
     paths-ignore:
-      - '**/*.md'  # Ignora mudanças em arquivos markdown
-  workflow_dispatch:  # Permite disparar manualmente pelo GitHub UI
+      - '**/*.md'
+  workflow_dispatch:
 
 jobs:
   build:
-    name: Build
+    name: Build 
     runs-on: ubuntu-latest
 
-    container:
-      image: google/android-sdk:latest
-
     steps:
+      # Checkout o repositório
       - name: Check out repository
         uses: actions/checkout@v4
 
+      # Configurar JDK 17
       - name: Set up JDK 17
         uses: actions/setup-java@v4
         with:
@@ -32,7 +29,8 @@ jobs:
           distribution: 'oracle'
           cache: gradle
 
-      - name: Install Android SDK
+      # Instalar NDK e CMake
+      - name: Install NDK and CMake
         run: |
           sudo apt-get update
           sudo apt-get install -y wget unzip
@@ -44,9 +42,19 @@ jobs:
           sdkmanager --licenses
           sdkmanager --install "ndk;25.1.8937393" "cmake;3.22.1"
 
+      # Garantir permissão de execução para o gradlew
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+
+      # Validar o wrapper do Gradle
+      - name: Validate Gradle wrapper
+        uses: gradle/actions/wrapper-validation@v4
+        
+      # Construir APK de release
       - name: Build App Release
         run: ./gradlew assembleRelease
 
+      # Fazer upload do APK gerado
       - name: Upload release app
         uses: actions/upload-artifact@v4
         with:
