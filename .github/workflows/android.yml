@@ -40,10 +40,12 @@ jobs:
           wget https://dl.google.com/android/repository/commandlinetools-linux-8512546_latest.zip
           unzip commandlinetools-linux-8512546_latest.zip -d $HOME/android-sdk
 
-          # Configurar variáveis de ambiente
-          echo "export ANDROID_HOME=$HOME/android-sdk" >> ~/.bashrc
-          echo "export PATH=$ANDROID_HOME/cmdline-tools/latest/bin:$PATH" >> ~/.bashrc
-          source ~/.bashrc
+          # Configurar variáveis de ambiente diretamente para o PATH da sessão atual
+          export ANDROID_HOME=$HOME/android-sdk
+          export PATH=$ANDROID_HOME/cmdline-tools/latest/bin:$PATH
+          
+          # Verificar se sdkmanager está disponível
+          sdkmanager --version
 
           # Aceitar licenças e instalar o NDK e CMake
           sdkmanager --licenses
