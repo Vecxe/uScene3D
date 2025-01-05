@@ -29,10 +29,10 @@ jobs:
           distribution: 'oracle'
           cache: gradle
 
-      # Instalar NDK e CMake
-      - name: Install NDK and CMake
+      # Instalar o Android SDK e NDK
+      - name: Install Android SDK, NDK and CMake
         run: |
-          # Instalar dependências
+          # Instalar dependências necessárias
           sudo apt-get update
           sudo apt-get install -y wget unzip
 
@@ -40,18 +40,14 @@ jobs:
           wget https://dl.google.com/android/repository/commandlinetools-linux-8512546_latest.zip
           unzip commandlinetools-linux-8512546_latest.zip -d $HOME/android-sdk
 
-          # Atualizar o PATH
+          # Configurar variáveis de ambiente
           export ANDROID_HOME=$HOME/android-sdk
           export PATH=$ANDROID_HOME/cmdline-tools/latest/bin:$PATH
           echo "ANDROID_HOME=$ANDROID_HOME"
           echo "PATH=$PATH"
 
-          # Verificar se sdkmanager está disponível
-          sdkmanager --version
-
-          # Aceitar licenças e instalar o NDK e CMake
-          sdkmanager --licenses
-          sdkmanager --install "ndk;25.1.8937393" "cmake;3.22.1"
+          # Instalar o NDK e CMake
+          yes | sdkmanager "ndk;25.1.8937393" "cmake;3.22.1" 
 
       # Garantir permissão de execução para o gradlew
       - name: Grant execute permission for gradlew
