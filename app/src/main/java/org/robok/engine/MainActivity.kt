@@ -37,7 +37,7 @@ class MainActivity : ComponentActivity(), AndroidFragmentApplication.Callbacks {
     setContent {
       MaterialTheme {
         val state = rememberGDXState()
-        GDXWidget(state)
+        GDXWidget(state = state)
       }
     }
   }
