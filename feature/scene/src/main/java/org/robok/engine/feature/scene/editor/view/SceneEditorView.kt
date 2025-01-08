@@ -31,11 +31,10 @@ import net.mgsx.gltf.scene3d.scene.SceneSkybox
 import net.mgsx.gltf.scene3d.utils.EnvironmentUtil
 import org.robok.engine.feature.scene.editor.controller.CameraInputController2
 import org.robok.engine.feature.scene.editor.drawing.DrawingRenderer
+import org.robok.engine.feature.scene.editor.hdri.HDRIToCubemapFaces
 import org.robok.engine.feature.scene.editor.objects.ObjectCommand
 import org.robok.engine.feature.scene.editor.objects.ObjectsCreator
 import org.robok.engine.feature.scene.editor.objects.SceneObject
-
-import org.robok.engine.feature.scene.editor.hdri.HDRIToCubemapFaces
 
 class SceneEditorView : ApplicationAdapter() {
 
@@ -66,16 +65,16 @@ class SceneEditorView : ApplicationAdapter() {
     initSky()
     initSceneManager()
     initController()
-   // initHdri()
+    // initHdri()
   }
-  
-  private fun initHdri(){
+
+  private fun initHdri() {
     var hdriConverter: HDRIToCubemapFaces = HDRIToCubemapFaces()
     val inputPath = "/storage/emulated/0/hdri/sky.hdr"
-    val outputPath= "/storage/emulated/0/hdri/output/"
+    val outputPath = "/storage/emulated/0/hdri/output/"
 
     hdriConverter.convert(inputPath, outputPath)
-}
+  }
 
   private fun initCamera() {
     cameraState.width = Gdx.graphics.width.toFloat()
@@ -132,10 +131,9 @@ class SceneEditorView : ApplicationAdapter() {
     Gdx.gl.glEnable(GL30.GL_DEPTH_TEST)
 
     drawingRenderer.start(camera)
-    
-    
+
     cameraInputController2.updateRenderer(drawingRenderer.shapeRenderer)
-    
+
     drawingRenderer.gridWithCircleAnimation(200f, 200f, 1f, 0.1f)
     drawingRenderer.drawRotatedSquare(0f, 4.5f, 2f, true)
     drawingRenderer.end()
