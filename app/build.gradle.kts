@@ -6,13 +6,6 @@ plugins {
   id("org.jetbrains.kotlin.plugin.compose")
 }
 
-
-tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach {
-  compilerOptions {
-    jvmTarget.set(JvmTarget.JVM_11)
-  }
-}
-
 android {
   namespace = "org.robok.engine"
   compileSdk = 34
@@ -39,8 +32,8 @@ android {
   }
 
   compileOptions {
-    sourceCompatibility = JavaVersion.VERSION_11
-    targetCompatibility = JavaVersion.VERSION_11
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
   }
 
   signingConfigs {
@@ -69,6 +62,12 @@ android {
 
   buildFeatures {
     compose = true
+  }
+}
+
+tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach {
+  compilerOptions {
+    jvmTarget.set(JvmTarget.JVM_17)
   }
 }
 
