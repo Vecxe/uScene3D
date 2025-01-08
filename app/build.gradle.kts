@@ -15,39 +15,28 @@ tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach 
 
 android {
   namespace = "org.robok.engine"
-  compileSdk = 33
+  compileSdk = 34
 
   defaultConfig {
     applicationId = "org.robok.engine.scene"
     minSdk = 26
-    targetSdk = 33
-
+    targetSdk = 34
     versionCode = 1
     versionName = "1.0"
     
     vectorDrawables.useSupportLibrary = true
-    
-    
-    
   }
-  
+
   packaging {
     jniLibs.useLegacyPackaging = true
+    exclude("META-INF/INDEX.LIST")
+    exclude("META-INF/ALIAS")
+    exclude("META-INF/DEPENDENCIES")
+    exclude("META-INF/LICENSE")
+    exclude("META-INF/LICENSE.txt")
+    exclude("META-INF/NOTICE")
+    exclude("META-INF/NOTICE.txt")
   }
-
-
-
-   
-    packagingOptions {
-        exclude("META-INF/INDEX.LIST") // Excluir INDEX.LIST
-        exclude("META-INF/ALIAS")
-        exclude("META-INF/DEPENDENCIES")
-        exclude("META-INF/LICENSE")
-        exclude("META-INF/LICENSE.txt")
-        exclude("META-INF/NOTICE")
-        exclude("META-INF/NOTICE.txt")
-    }
-    
 
   compileOptions {
     sourceCompatibility = JavaVersion.VERSION_11
@@ -106,6 +95,4 @@ dependencies {
   implementation("com.badlogicgames.gdx:gdx-platform:1.9.14:natives-x86_64")
 
   implementation(project(":feature:scene"))
-  
-
 }
