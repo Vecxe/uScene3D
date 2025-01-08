@@ -12,18 +12,35 @@ tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach 
 }
 
 android {
-  namespace = "org.robok.engine.feature.scene"
-  compileSdk = 33
+    namespace = "org.robok.engine.feature.scene"
+    compileSdk = 33
 
-  defaultConfig {
-    minSdk = 26
-    vectorDrawables.useSupportLibrary = true
-  }
-    
-  compileOptions {
-    sourceCompatibility = JavaVersion.VERSION_11
-    targetCompatibility = JavaVersion.VERSION_11
-  }
+    defaultConfig {
+        minSdk = 26
+        vectorDrawables.useSupportLibrary = true
+
+        ndk {
+            abiFilters += listOf("armeabi-v7a", "arm64-v8a", "x86", "x86_64")
+        }
+
+        externalNativeBuild {
+            cmake {
+                arguments += listOf("-DANDROID_STL=c++_shared")
+                cppFlags += "-std=c++17"
+            }
+        }
+    }
+
+    externalNativeBuild {
+        cmake {
+            path = file("src/main/cpp/CMakeLists.txt")
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
+    }
 }
 
 dependencies {
@@ -38,4 +55,9 @@ dependencies {
   implementation("com.badlogicgames.gdx:gdx-platform:1.9.14:natives-x86_64")
     
   implementation("com.github.mgsx-dev.gdx-gltf:gltf:2.2.1")
+  
+  implementation("org.lwjgl:lwjgl:3.3.1") // Núcleo do LWJGL
+    implementation("org.lwjgl:lwjgl-opengl:3.3.1") // OpenGL para trabalhar com texturas
+    implementation("org.lwjgl:lwjgl-stb:3.3.1") // STBImage para carregar imagens HDR
+    implementation("org.lwjgl:lwjgl-glfw:3.3.1") // GLFW, caso precise para o contexto de janela, pode ser útil no futuro
 }
