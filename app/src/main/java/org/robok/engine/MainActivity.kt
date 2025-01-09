@@ -24,12 +24,13 @@ import android.view.WindowInsets
 import android.view.WindowInsetsController
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.material3.MaterialTheme
 import com.badlogic.gdx.backends.android.AndroidFragmentApplication
 import org.robok.engine.compose.GDXWidget
 import org.robok.engine.compose.rememberGDXState
 
-class MainActivity : ComponentActivity(), AndroidFragmentApplication.Callbacks {
+class MainActivity : AppCompatActivity(), AndroidFragmentApplication.Callbacks {
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
