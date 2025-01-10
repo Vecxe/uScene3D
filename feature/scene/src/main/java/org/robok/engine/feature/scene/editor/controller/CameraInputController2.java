@@ -160,7 +160,8 @@ public class CameraInputController2 extends GestureDetector {
       if (count == 2) {
         object = new CameraInputController2.Object(controller.camera);
         controller.sceneObject = object.getObjectFromTap(x, y);
-        if (controller.sceneObject != null) focusCameraOnObjectWithAnimation(controller.sceneObject, 2);
+        if (controller.sceneObject != null)
+          focusCameraOnObjectWithAnimation(controller.sceneObject, 2);
 
         controller.ammount = true;
       }
@@ -257,61 +258,62 @@ public class CameraInputController2 extends GestureDetector {
       return true;
     }
 
-     // Method that animates the camera to the object
-private void focusCameraOnObjectWithAnimation(SceneObject sceneObject, float durationSeconds) {
-    // Get the initial position of the camera
-    Vector3 initialPosition = new Vector3(controller.camera.position);
+    // Method that animates the camera to the object
+    private void focusCameraOnObjectWithAnimation(SceneObject sceneObject, float durationSeconds) {
+      // Get the initial position of the camera
+      Vector3 initialPosition = new Vector3(controller.camera.position);
 
-    // Get the target position of the object
-    Vector3 targetPosition = new Vector3();
-    sceneObject.getModelInstance().transform.getTranslation(targetPosition);
-    // targetPosition.z = 0f;
+      // Get the target position of the object
+      Vector3 targetPosition = new Vector3();
+      sceneObject.getModelInstance().transform.getTranslation(targetPosition);
+      // targetPosition.z = 0f;
 
-    // Define the final position of the camera (slightly offset from the target)
-    float distance = 10f;
-    Vector3 finalPosition = new Vector3(
-        targetPosition.x + distance,
-        targetPosition.y + distance,
-        targetPosition.z + distance
-    );
+      // Define the final position of the camera (slightly offset from the target)
+      float distance = 10f;
+      Vector3 finalPosition =
+          new Vector3(
+              targetPosition.x + distance,
+              targetPosition.y + distance,
+              targetPosition.z + distance);
 
-    // Variable to track elapsed time
-    final float[] elapsedTime = {0f};
-            
-    controller.target.set(targetPosition);     
-    // Update function for animation
-    Runnable updateCamera = new Runnable() {
-        @Override
-        public void run() {
-            // Increment elapsed time with deltaTime
-            float deltaTime = Gdx.graphics.getDeltaTime();
-            elapsedTime[0] += deltaTime;
-                    
-            // Calculate animation progress (from 0.0 to 1.0)
-            float progress = Math.min(elapsedTime[0] / durationSeconds, 1.0f);
+      // Variable to track elapsed time
+      final float[] elapsedTime = {0f};
 
-            // Interpolate the camera's position using LERP
-            controller.camera.position.set(initialPosition).lerp(finalPosition, progress);
+      controller.target.set(targetPosition);
+      // Update function for animation
+      Runnable updateCamera =
+          new Runnable() {
+            @Override
+            public void run() {
+              // Increment elapsed time with deltaTime
+              float deltaTime = Gdx.graphics.getDeltaTime();
+              elapsedTime[0] += deltaTime;
 
-            // Set the camera to look at the target
-            controller.camera.lookAt(targetPosition);
+              // Calculate animation progress (from 0.0 to 1.0)
+              float progress = Math.min(elapsedTime[0] / durationSeconds, 1.0f);
 
-            // Adjust the camera's "up" vector to ensure it is properly oriented
-            controller.camera.up.set(0, 1, 0);        
-            // Update the camera
-            controller.camera.update();
+              // Interpolate the camera's position using LERP
+              controller.camera.position.set(initialPosition).lerp(finalPosition, progress);
 
-            // Continue animating while progress is less than 1
-            if (progress < 1.0f) {
+              // Set the camera to look at the target
+              controller.camera.lookAt(targetPosition);
+
+              // Adjust the camera's "up" vector to ensure it is properly oriented
+              controller.camera.up.set(0, 1, 0);
+              // Update the camera
+              controller.camera.update();
+
+              // Continue animating while progress is less than 1
+              if (progress < 1.0f) {
                 Gdx.app.postRunnable(this);
+              }
             }
-        }
-    };
+          };
 
-    // Start the animation
-    Gdx.app.postRunnable(updateCamera);
-}
-        
+      // Start the animation
+      Gdx.app.postRunnable(updateCamera);
+    }
+
     private void focusCameraOnObject(SceneObject sceneObject) {
       ModelInstance modelInstance = sceneObject.getModelInstance();
 
@@ -326,7 +328,8 @@ private void focusCameraOnObjectWithAnimation(SceneObject sceneObject, float dur
       // Set the target point for the camera
       controller.target.set(objectPosition);
 
-      // Position the camera at a certain distance from the object on the Z-axis (or another axis if preferred)
+      // Position the camera at a certain distance from the object on the Z-axis (or another axis if
+      // preferred)
       controller.camera.position.set(
           objectPosition.x + distance, objectPosition.y + distance, objectPosition.z + distance);
 
@@ -339,8 +342,9 @@ private void focusCameraOnObjectWithAnimation(SceneObject sceneObject, float dur
       // Update the camera to apply the changes
       controller.camera.update();
     }
-  };
-    
+  }
+  ;
+
   public static class Object {
     private Camera camera;
 

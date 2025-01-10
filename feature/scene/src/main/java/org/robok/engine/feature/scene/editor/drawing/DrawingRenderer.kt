@@ -1,9 +1,9 @@
 package org.robok.engine.feature.scene.editor.drawing
 
+import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.PerspectiveCamera
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer
-import com.badlogic.gdx.Gdx
 
 class DrawingRenderer() {
 
@@ -93,13 +93,7 @@ class DrawingRenderer() {
     }
   }
 
-
-fun gridWithAnimation(
-    width: Float,
-    depth: Float,
-    cellSize: Float,
-    lineThickness: Float,
-) {
+  fun gridWithAnimation(width: Float, depth: Float, cellSize: Float, lineThickness: Float) {
     var delta = Gdx.graphics.deltaTime
     progress += delta * 0.5f // Velocidade da animação
     if (progress > 1f) progress = 1f
@@ -128,68 +122,64 @@ fun gridWithAnimation(
     // Desenha linhas horizontais (ao longo do eixo X)
     var z = animStartZ
     while (z <= animEndZ) {
-        if (Math.abs(z - centerZ) < cellSize / 2) {
-            // Linha central mais grossa
-            shapeRenderer.line(
-                animStartX,
-                centerY,
-                z - lineThickness / 2,
-                animEndX,
-                centerY,
-                z - lineThickness / 2,
-            )
-            shapeRenderer.line(
-                animStartX,
-                centerY,
-                z + lineThickness / 2,
-                animEndX,
-                centerY,
-                z + lineThickness / 2,
-            )
-        } else {
-            shapeRenderer.line(animStartX, centerY, z, animEndX, centerY, z)
-        }
-        z += cellSize
+      if (Math.abs(z - centerZ) < cellSize / 2) {
+        // Linha central mais grossa
+        shapeRenderer.line(
+          animStartX,
+          centerY,
+          z - lineThickness / 2,
+          animEndX,
+          centerY,
+          z - lineThickness / 2,
+        )
+        shapeRenderer.line(
+          animStartX,
+          centerY,
+          z + lineThickness / 2,
+          animEndX,
+          centerY,
+          z + lineThickness / 2,
+        )
+      } else {
+        shapeRenderer.line(animStartX, centerY, z, animEndX, centerY, z)
+      }
+      z += cellSize
     }
 
     // Desenha linhas verticais (ao longo do eixo Z)
     var x = animStartX
     while (x <= animEndX) {
-        if (Math.abs(x - centerX) < cellSize / 2) {
-            // Linha central mais grossa
-            shapeRenderer.line(
-                x - lineThickness / 2,
-                centerY,
-                animStartZ,
-                x - lineThickness / 2,
-                centerY,
-                animEndZ,
-            )
-            shapeRenderer.line(
-                x + lineThickness / 2,
-                centerY,
-                animStartZ,
-                x + lineThickness / 2,
-                centerY,
-                animEndZ,
-            )
-        } else {
-            shapeRenderer.line(x, centerY, animStartZ, x, centerY, animEndZ)
-        }
-        x += cellSize
+      if (Math.abs(x - centerX) < cellSize / 2) {
+        // Linha central mais grossa
+        shapeRenderer.line(
+          x - lineThickness / 2,
+          centerY,
+          animStartZ,
+          x - lineThickness / 2,
+          centerY,
+          animEndZ,
+        )
+        shapeRenderer.line(
+          x + lineThickness / 2,
+          centerY,
+          animStartZ,
+          x + lineThickness / 2,
+          centerY,
+          animEndZ,
+        )
+      } else {
+        shapeRenderer.line(x, centerY, animStartZ, x, centerY, animEndZ)
+      }
+      x += cellSize
     }
-}
+  }
 
-fun gridWithCircleAnimation(
-    width: Float,
-    depth: Float,
-    cellSize: Float,
-    lineThickness: Float,
-) {
+  fun gridWithCircleAnimation(width: Float, depth: Float, cellSize: Float, lineThickness: Float) {
 
-    // A variável radius deve ser controlada externamente, mas se você já estiver fazendo isso, basta deixá-la aqui.
+    // A variável radius deve ser controlada externamente, mas se você já estiver fazendo isso,
+    // basta deixá-la aqui.
     radius += Gdx.graphics.deltaTime * 25f
-    
+
     val centerX = 0f
     val centerY = 0f
     val centerZ = 0f
@@ -204,63 +194,64 @@ fun gridWithCircleAnimation(
     // Desenha linhas horizontais dentro do raio
     var z = startZ
     while (z <= endZ) {
-        if (Math.hypot(z - centerZ.toDouble(), 0.0).toFloat() <= radius) {
-            // Desenha linha horizontal
-            shapeRenderer.line(startX, centerY, z, endX, centerY, z)
-            
-            // Desenha linha central mais grossa (horizontal)
-            if (Math.abs(z - centerZ) < cellSize / 2) {
-                shapeRenderer.line(
-                    startX,
-                    centerY,
-                    z - lineThickness / 2,
-                    endX,
-                    centerY,
-                    z - lineThickness / 2
-                )
-                shapeRenderer.line(
-                    startX,
-                    centerY,
-                    z + lineThickness / 2,
-                    endX,
-                    centerY,
-                    z + lineThickness / 2
-                )
-            }
+      if (Math.hypot(z - centerZ.toDouble(), 0.0).toFloat() <= radius) {
+        // Desenha linha horizontal
+        shapeRenderer.line(startX, centerY, z, endX, centerY, z)
+
+        // Desenha linha central mais grossa (horizontal)
+        if (Math.abs(z - centerZ) < cellSize / 2) {
+          shapeRenderer.line(
+            startX,
+            centerY,
+            z - lineThickness / 2,
+            endX,
+            centerY,
+            z - lineThickness / 2,
+          )
+          shapeRenderer.line(
+            startX,
+            centerY,
+            z + lineThickness / 2,
+            endX,
+            centerY,
+            z + lineThickness / 2,
+          )
         }
-        z += cellSize
+      }
+      z += cellSize
     }
 
     // Desenha linhas verticais dentro do raio
     var x = startX
     while (x <= endX) {
-        if (Math.hypot(x - centerX.toDouble(), 0.0).toFloat() <= radius) {
-            // Desenha linha vertical
-            shapeRenderer.line(x, centerY, startZ, x, centerY, endZ)
-            
-            // Desenha linha central mais grossa (vertical)
-            if (Math.abs(x - centerX) < cellSize / 2) {
-                shapeRenderer.line(
-                    x - lineThickness / 2,
-                    centerY,
-                    startZ,
-                    x - lineThickness / 2,
-                    centerY,
-                    endZ
-                )
-                shapeRenderer.line(
-                    x + lineThickness / 2,
-                    centerY,
-                    startZ,
-                    x + lineThickness / 2,
-                    centerY,
-                    endZ
-                )
-            }
+      if (Math.hypot(x - centerX.toDouble(), 0.0).toFloat() <= radius) {
+        // Desenha linha vertical
+        shapeRenderer.line(x, centerY, startZ, x, centerY, endZ)
+
+        // Desenha linha central mais grossa (vertical)
+        if (Math.abs(x - centerX) < cellSize / 2) {
+          shapeRenderer.line(
+            x - lineThickness / 2,
+            centerY,
+            startZ,
+            x - lineThickness / 2,
+            centerY,
+            endZ,
+          )
+          shapeRenderer.line(
+            x + lineThickness / 2,
+            centerY,
+            startZ,
+            x + lineThickness / 2,
+            centerY,
+            endZ,
+          )
         }
-        x += cellSize
+      }
+      x += cellSize
     }
-}
+  }
+
   fun gridAndNails(
     width: Float,
     depth: Float,
@@ -458,12 +449,11 @@ fun gridWithCircleAnimation(
   }
 
   fun drawRotatedSquare(centerX: Float, centerY: Float, size: Float, rotate: Boolean) {
-  
-     if(rotate){
-        angle += 90f * Gdx.graphics.deltaTime
-    }else angle = 0f
-     
-  
+
+    if (rotate) {
+      angle += 90f * Gdx.graphics.deltaTime
+    } else angle = 0f
+
     // Calcula os vértices do quadrado
     val halfSize = size / 2
 
