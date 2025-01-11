@@ -7,7 +7,7 @@
 #define LOGD(...) __android_log_print(ANDROID_LOG_DEBUG, LOG_TAG, __VA_ARGS__)
 
 extern "C" JNIEXPORT void JNICALL
-Java_com_example_MainActivity_convertHdriToCubemap(JNIEnv *env, jobject /* this */, jstring inputPath, jstring outputPath) {
+Java_org_robok_engine_feature_scene_editor_view_SceneEditorView_convertHdriToCubemap(JNIEnv *env, jobject /* this */, jstring inputPath, jstring outputPath) {
     
     const char *inputPathCStr = env->GetStringUTFChars(inputPath, nullptr);
     const char *outputPathCStr = env->GetStringUTFChars(outputPath, nullptr);

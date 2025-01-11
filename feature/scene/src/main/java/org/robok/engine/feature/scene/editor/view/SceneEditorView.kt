@@ -39,6 +39,10 @@ import org.robok.engine.feature.scene.editor.objects.SceneObject
 class SceneEditorView : ApplicationAdapter() {
 
   companion object {
+    init{
+        System.loadLibrary("hdri_to_cubemap")
+    }
+    
     @JvmStatic val sceneState = SceneState()
   }
 
@@ -59,21 +63,24 @@ class SceneEditorView : ApplicationAdapter() {
   private var progress = 0f
 
   var command: String? = null
-
+  
+  external fun convertHdriToCubemap(inputPath: String, outputPath: String)
+  
+  
   private fun init() {
     initCamera()
     initSky()
     initSceneManager()
     initController()
-    // initHdri()
+     initHdri()
   }
 
   private fun initHdri() {
-    var hdriConverter: HDRIToCubemapFaces = HDRIToCubemapFaces()
+   // var hdriConverter: HDRIToCubemapFaces = HDRIToCubemapFaces()
     val inputPath = "/storage/emulated/0/hdri/sky.hdr"
     val outputPath = "/storage/emulated/0/hdri/output/"
 
-    hdriConverter.convert(inputPath, outputPath)
+    convertHdriToCubemap(inputPath, outputPath)
   }
 
   private fun initCamera() {
