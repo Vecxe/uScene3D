@@ -75,7 +75,7 @@ dependencies {
   implementation("androidx.constraintlayout:constraintlayout:2.2.0")
   implementation("com.google.android.material:material:1.12.0")
   implementation("androidx.appcompat:appcompat:1.7.0")
-  implementation("androidx.fragment:fragment-ktx:1.6.1")
+  implementation("androidx.fragment:fragment-ktx:1.8.5")
 
   implementation(platform("androidx.compose:compose-bom:2024.12.01"))
   implementation("androidx.core:core-ktx:1.15.0")
