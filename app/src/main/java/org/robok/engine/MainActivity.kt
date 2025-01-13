@@ -17,29 +17,38 @@ package org.robok.engine
  *   along with Robok.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import android.os.Build
 import android.os.Bundle
-import android.view.View
-import android.view.WindowInsets
-import android.view.WindowInsetsController
-import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.runtime.Composable
 import com.badlogic.gdx.backends.android.AndroidFragmentApplication
 import org.robok.engine.compose.GDXWidget
 import org.robok.engine.compose.rememberGDXState
+import org.robok.engine.feature.scene.editor.interfaces.EmptyObjectActionListener
+import org.robok.engine.feature.scene.editor.interfaces.ObjectListener
+import org.robok.engine.feature.scene.editor.objects.SceneObject
 
 class MainActivity : AppCompatActivity(), AndroidFragmentApplication.Callbacks {
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-    setContent {
-      MaterialTheme {
-        val state = rememberGDXState()
-        GDXWidget(state = state)
+    setContent { MaterialTheme { Screen(savedInstanceState) } }
+  }
+
+  @Composable
+  fun Screen(savedInstanceState: Bundle?) {
+    val state = rememberGDXState()
+
+    GDXWidget(state = state)
+
+    state.objectListener =
+      object : ObjectListener {
+        override fun onObjectClick(sceneObject: SceneObject, x: Float, y: Float) {
+          // do someting when user click in object
+        }
       }
-    }
+    state.objectActionListener = state.fragment?.sceneEditorView ?: EmptyObjectActionListener()
   }
 
   override fun exit() {

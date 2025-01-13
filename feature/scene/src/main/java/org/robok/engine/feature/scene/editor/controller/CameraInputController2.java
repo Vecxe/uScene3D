@@ -32,6 +32,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.math.collision.BoundingBox;
 import com.badlogic.gdx.math.collision.Ray;
+import org.robok.engine.feature.scene.editor.interfaces.ObjectListener;
 import org.robok.engine.feature.scene.editor.objects.SceneObject;
 import org.robok.engine.feature.scene.editor.view.SceneEditorView;
 
@@ -115,6 +116,8 @@ public class CameraInputController2 extends GestureDetector {
   // objeto selecionado
   public SceneObject sceneObject;
 
+  private static ObjectListener objectListener;
+
   protected static class CameraGestureListener extends GestureAdapter {
     public CameraInputController2 controller;
     private float previousZoom;
@@ -148,6 +151,7 @@ public class CameraInputController2 extends GestureDetector {
           Log.e("Error", "SceneObject é diferente de null");
           // object = new CameraInputController2.Object(controller.camera);
           controller.sceneObject = sc;
+          objectListener.onObjectClick(sc, x, y);
         } else {
           String objects = "";
           for (SceneObject scene : SceneEditorView.getSceneState().getObjects()) {
@@ -400,18 +404,18 @@ public class CameraInputController2 extends GestureDetector {
   protected final CameraGestureListener gestureListener;
 
   protected CameraInputController2(
-      final CameraGestureListener gestureListener, final Camera camera) {
+      final CameraGestureListener gestureListener,
+      final Camera camera,
+      final ObjectListener objectListener) {
     super(gestureListener);
     this.gestureListener = gestureListener;
     this.gestureListener.controller = this;
     this.camera = camera;
+    this.objectListener = objectListener;
   }
 
-  public CameraInputController2(final Camera camera) {
-
-    this(new CameraGestureListener(), camera);
-    //  this.camera = camera;
-    // this.movimentObject = new MovimentObject(camera);
+  public CameraInputController2(final Camera camera, final ObjectListener objectListener) {
+    this(new CameraGestureListener(), camera, objectListener);
   }
 
   public void update() {
