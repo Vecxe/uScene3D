@@ -27,6 +27,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.viewinterop.AndroidView
 import org.robok.engine.feature.scene.editor.fragment.LibGDXFragment
+import org.robok.engine.feature.scene.editor.interfaces.ObjectActionListener
+import org.robok.engine.feature.scene.editor.interfaces.ObjectListener
 
 @Composable
 fun GDXWidget(modifier: Modifier = Modifier, state: GDXState) {
@@ -40,7 +42,7 @@ private fun setGDXFactory(context: Context, state: GDXState): FrameLayout {
   frame.id = View.generateViewId()
 
   frame.post {
-    val fragment = LibGDXFragment()
+    val fragment = LibGDXFragment(state.objectListener)
     state.fragment = fragment
 
     val fragmentManager = (context as AppCompatActivity).supportFragmentManager
@@ -55,4 +57,8 @@ private fun setGDXFactory(context: Context, state: GDXState): FrameLayout {
 
 @Composable fun rememberGDXState() = remember { GDXState() }
 
-data class GDXState(var fragment: LibGDXFragment? = null)
+data class GDXState(
+  var fragment: LibGDXFragment? = null,
+  var objectListener: ObjectListener? = null,
+  var objectActionListener: ObjectActionListener? = null,
+)

@@ -31,18 +31,19 @@ import net.mgsx.gltf.scene3d.scene.SceneSkybox
 import net.mgsx.gltf.scene3d.utils.EnvironmentUtil
 import org.robok.engine.feature.scene.editor.controller.CameraInputController2
 import org.robok.engine.feature.scene.editor.drawing.DrawingRenderer
-import org.robok.engine.feature.scene.editor.hdri.HDRIToCubemapFaces
+import org.robok.engine.feature.scene.editor.interfaces.ObjectActionListener
+import org.robok.engine.feature.scene.editor.interfaces.ObjectListener
 import org.robok.engine.feature.scene.editor.objects.ObjectCommand
 import org.robok.engine.feature.scene.editor.objects.ObjectsCreator
 import org.robok.engine.feature.scene.editor.objects.SceneObject
 
-class SceneEditorView : ApplicationAdapter() {
+class SceneEditorView : ApplicationAdapter(), ObjectListener, ObjectActionListener {
 
   companion object {
-    init{
-        System.loadLibrary("hdri_to_cubemap")
+    init {
+      System.loadLibrary("hdri_to_cubemap")
     }
-    
+
     @JvmStatic val sceneState = SceneState()
   }
 
@@ -63,20 +64,21 @@ class SceneEditorView : ApplicationAdapter() {
   private var progress = 0f
 
   var command: String? = null
-  
+
+  lateinit var objectListener: ObjectListener
+
   external fun convertHdriToCubemap(inputPath: String, outputPath: String)
-  
-  
+
   private fun init() {
     initCamera()
     initSky()
     initSceneManager()
     initController()
-     initHdri()
+    initHdri()
   }
 
   private fun initHdri() {
-   // var hdriConverter: HDRIToCubemapFaces = HDRIToCubemapFaces()
+    // var hdriConverter: HDRIToCubemapFaces = HDRIToCubemapFaces()
     val inputPath = "/storage/emulated/0/hdri/sky.hdr"
     val outputPath = "/storage/emulated/0/hdri/output/"
 
@@ -115,8 +117,18 @@ class SceneEditorView : ApplicationAdapter() {
   }
 
   private fun initController() {
-    cameraInputController2 = CameraInputController2(camera)
+    cameraInputController2 = CameraInputController2(camera, this)
     Gdx.input.setInputProcessor(cameraInputController2)
+  }
+
+  // from ObjectListener
+  override fun onObjectClick(sceneObject: SceneObject, x: Float, y: Float) {
+    /* call ui listener */ objectListener.onObjectClick(sceneObject, x, y)
+  }
+
+  // from ObjectActionListener
+  override fun onMove(x: Float, y: Float, z: Float) {
+    // todo move object
   }
 
   override fun create() {

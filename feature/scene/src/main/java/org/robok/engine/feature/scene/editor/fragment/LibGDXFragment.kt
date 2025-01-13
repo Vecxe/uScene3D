@@ -23,11 +23,14 @@ import android.view.View
 import android.view.ViewGroup
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration
 import com.badlogic.gdx.backends.android.AndroidFragmentApplication
+import org.robok.engine.feature.scene.editor.interfaces.EmptyObjectListener
+import org.robok.engine.feature.scene.editor.interfaces.ObjectListener
 import org.robok.engine.feature.scene.editor.view.SceneEditorView
 
-class LibGDXFragment : AndroidFragmentApplication() {
+class LibGDXFragment(private val objectListener: ObjectListener? = null) :
+  AndroidFragmentApplication() {
 
-  private lateinit var model3DView: SceneEditorView
+  lateinit var sceneEditorView: SceneEditorView
 
   override fun onCreateView(
     inflater: LayoutInflater,
@@ -39,11 +42,8 @@ class LibGDXFragment : AndroidFragmentApplication() {
         useGL30 = true // Configuração GL30 conforme necessário
       }
 
-    model3DView = SceneEditorView()
-    return initializeForView(model3DView, config)
-  }
-
-  fun getModel3DView(): SceneEditorView {
-    return model3DView
+    sceneEditorView = SceneEditorView()
+    sceneEditorView.objectListener = objectListener ?: EmptyObjectListener()
+    return initializeForView(sceneEditorView, config)
   }
 }
