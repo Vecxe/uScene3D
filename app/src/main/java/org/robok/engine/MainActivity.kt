@@ -30,6 +30,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.badlogic.gdx.backends.android.AndroidFragmentApplication
@@ -39,6 +40,7 @@ import org.robok.engine.compose.rememberGDXState
 import org.robok.engine.feature.scene.editor.interfaces.EmptyObjectActionListener
 import org.robok.engine.feature.scene.editor.interfaces.ObjectListener
 import org.robok.engine.feature.scene.editor.objects.SceneObject
+
 
 class MainActivity : AppCompatActivity(), AndroidFragmentApplication.Callbacks {
 
