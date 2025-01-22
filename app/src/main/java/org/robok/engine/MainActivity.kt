@@ -43,6 +43,7 @@ class MainActivity : AppCompatActivity(), AndroidFragmentApplication.Callbacks {
     val state = rememberGDXState()
 
     GDXWidget(state = state)
+    GDXScreen(state = state)
 
     state.objectListener =
       object : ObjectListener {

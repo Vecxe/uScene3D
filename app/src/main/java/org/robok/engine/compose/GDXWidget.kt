@@ -34,13 +34,14 @@ import org.robok.engine.feature.scene.editor.interfaces.ObjectListener
 fun GDXWidget(modifier: Modifier = Modifier, state: GDXState) {
   val context = LocalContext.current
   val gdxFactory = remember { setGDXFactory(context = context, state = state) }
+  
   AndroidView(factory = { gdxFactory }, modifier = modifier)
 }
 
 private fun setGDXFactory(context: Context, state: GDXState): FrameLayout {
   val frame = FrameLayout(context)
   frame.id = View.generateViewId()
-
+    
   frame.post {
     val fragment = LibGDXFragment(state.objectListener)
     state.fragment = fragment
@@ -53,6 +54,34 @@ private fun setGDXFactory(context: Context, state: GDXState): FrameLayout {
   }
 
   return frame
+}
+
+@Composable
+fun GDXScreen(state: GDXState) {
+    Column(modifier = Modifier.fillMaxSize()) {
+    
+        Text(
+            text = "Editor de Cenas",
+            modifier = Modifier.padding(16.dp),
+            style = MaterialTheme.typography.h5
+        )
+
+        Box(modifier = Modifier.weight(1f)) {
+            GDXWidget(
+                modifier = Modifier.fillMaxSize(),
+                state = state
+            )
+        }
+
+        Button(
+            onClick = { state.objectActionListener?.onAction("ButtonClicked") },
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp)
+        ) {
+            Text("Executar Ação")
+        }
+    }
 }
 
 @Composable fun rememberGDXState() = remember { GDXState() }
