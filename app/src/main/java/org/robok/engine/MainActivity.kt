@@ -22,8 +22,18 @@ import androidx.activity.enableEdgeToEdge
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
+import androidx.compose.material3.Button
 import androidx.compose.runtime.Composable
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import com.badlogic.gdx.backends.android.AndroidFragmentApplication
+import org.robok.engine.compose.GDXState
 import org.robok.engine.compose.GDXWidget
 import org.robok.engine.compose.rememberGDXState
 import org.robok.engine.feature.scene.editor.interfaces.EmptyObjectActionListener
@@ -42,7 +52,6 @@ class MainActivity : AppCompatActivity(), AndroidFragmentApplication.Callbacks {
   fun Screen(savedInstanceState: Bundle?) {
     val state = rememberGDXState()
 
-    GDXWidget(state = state)
     GDXScreen(state = state)
 
     state.objectListener =
@@ -52,6 +61,31 @@ class MainActivity : AppCompatActivity(), AndroidFragmentApplication.Callbacks {
         }
       }
     state.objectActionListener = state.fragment?.sceneEditorView ?: EmptyObjectActionListener()
+  }
+
+  @Composable
+  fun GDXScreen(state: GDXState) {
+    Column(modifier = Modifier.fillMaxSize()) {
+      Text(
+        text = "Scene Editor",
+        modifier = Modifier.padding(16.dp),
+        style = MaterialTheme.typography.titleLarge
+      )
+      Box(modifier = Modifier.weight(1f)) {
+        GDXWidget(
+          modifier = Modifier.fillMaxSize(),
+          state = state
+        )
+      }
+      Button(
+        onClick = { /* do something */ },
+        modifier = Modifier
+          .fillMaxWidth()
+          .padding(16.dp)
+      ) {
+        Text(text = "Perform Action")
+      }
+    }
   }
 
   override fun exit() {

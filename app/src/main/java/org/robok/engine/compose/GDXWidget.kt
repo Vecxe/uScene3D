@@ -24,6 +24,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.viewinterop.AndroidView
 import org.robok.engine.feature.scene.editor.fragment.LibGDXFragment
@@ -54,34 +55,6 @@ private fun setGDXFactory(context: Context, state: GDXState): FrameLayout {
   }
 
   return frame
-}
-
-@Composable
-fun GDXScreen(state: GDXState) {
-    Column(modifier = Modifier.fillMaxSize()) {
-    
-        Text(
-            text = "Editor de Cenas",
-            modifier = Modifier.padding(16.dp),
-            style = MaterialTheme.typography.h5
-        )
-
-        Box(modifier = Modifier.weight(1f)) {
-            GDXWidget(
-                modifier = Modifier.fillMaxSize(),
-                state = state
-            )
-        }
-
-        Button(
-            onClick = { state.objectActionListener?.onAction("ButtonClicked") },
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(16.dp)
-        ) {
-            Text("Executar Ação")
-        }
-    }
 }
 
 @Composable fun rememberGDXState() = remember { GDXState() }
