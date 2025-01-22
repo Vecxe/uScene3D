@@ -12,34 +12,17 @@ android {
   defaultConfig {
     minSdk = 26
     vectorDrawables.useSupportLibrary = true
-    
-    ndk {
-      abiFilters += listOf("armeabi-v7a", "arm64-v8a", "x86", "x86_64")
-    }
-    
-    externalNativeBuild {
-      cmake {
-        arguments += listOf("-DANDROID_STL=c++_shared")
-        cppFlags += "-std=c++17"
-      }
-    }
-  }
-  
-  externalNativeBuild {
-    cmake {
-      path = file("src/main/cpp/CMakeLists.txt")
-    }
   }
 
   compileOptions {
-    sourceCompatibility = JavaVersion.VERSION_17
-    targetCompatibility = JavaVersion.VERSION_17
+    sourceCompatibility = JavaVersion.VERSION_21
+    targetCompatibility = JavaVersion.VERSION_21
   }
 }
 
 tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach {
   compilerOptions {
-    jvmTarget.set(JvmTarget.JVM_17)
+    jvmTarget.set(JvmTarget.JVM_21)
   }
 }
 
@@ -55,6 +38,8 @@ dependencies {
   implementation("com.badlogicgames.gdx:gdx-platform:1.9.14:natives-x86_64")
 
   implementation("com.github.mgsx-dev.gdx-gltf:gltf:2.2.1")
+
+  implementation("com.github.Robok-Engine:HdriToCubemap:2.0.0")
 
   implementation("org.lwjgl:lwjgl:3.3.1") // LWJGL Core
   implementation("org.lwjgl:lwjgl-opengl:3.3.1") // OpenGL for working with textures
