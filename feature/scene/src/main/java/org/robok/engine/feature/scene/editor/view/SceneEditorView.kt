@@ -29,6 +29,7 @@ import net.mgsx.gltf.scene3d.attributes.PBRTextureAttribute
 import net.mgsx.gltf.scene3d.scene.SceneManager
 import net.mgsx.gltf.scene3d.scene.SceneSkybox
 import net.mgsx.gltf.scene3d.utils.EnvironmentUtil
+import org.robok.hdritocubemap.HdriToCubemap
 import org.robok.engine.feature.scene.editor.controller.CameraInputController2
 import org.robok.engine.feature.scene.editor.drawing.DrawingRenderer
 import org.robok.engine.feature.scene.editor.interfaces.ObjectActionListener
@@ -40,10 +41,6 @@ import org.robok.engine.feature.scene.editor.objects.SceneObject
 class SceneEditorView : ApplicationAdapter(), ObjectListener, ObjectActionListener {
 
   companion object {
-    init {
-      System.loadLibrary("hdri_to_cubemap")
-    }
-
     @JvmStatic val sceneState = SceneState()
   }
 
@@ -67,22 +64,12 @@ class SceneEditorView : ApplicationAdapter(), ObjectListener, ObjectActionListen
 
   lateinit var objectListener: ObjectListener
 
-  external fun convertHdriToCubemap(inputPath: String, outputPath: String)
-
   private fun init() {
     initCamera()
     initSky()
     initSceneManager()
     initController()
     initHdri()
-  }
-
-  private fun initHdri() {
-    // var hdriConverter: HDRIToCubemapFaces = HDRIToCubemapFaces()
-    val inputPath = "/storage/emulated/0/hdri/sky.hdr"
-    val outputPath = "/storage/emulated/0/hdri/output/"
-
-    convertHdriToCubemap(inputPath, outputPath)
   }
 
   private fun initCamera() {
@@ -119,6 +106,13 @@ class SceneEditorView : ApplicationAdapter(), ObjectListener, ObjectActionListen
   private fun initController() {
     cameraInputController2 = CameraInputController2(camera, this)
     Gdx.input.setInputProcessor(cameraInputController2)
+  }
+
+  private fun initHdri() {
+    // test
+    val inputPath = "/storage/emulated/0/hdri/sky.hdr"
+    val outputPath = "/storage/emulated/0/hdri/output/"
+    HdriToCubemap.convertHdriToCubemap(inputPath, outputPath)
   }
 
   // from ObjectListener
