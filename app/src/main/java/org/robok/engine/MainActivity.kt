@@ -64,29 +64,32 @@ class MainActivity : AppCompatActivity(), AndroidFragmentApplication.Callbacks {
   }
 
   @Composable
-  fun GDXScreen(state: GDXState) {
-    Column(modifier = Modifier.fillMaxSize()) {
-      Text(
-        text = "Scene Editor",
-        modifier = Modifier.padding(16.dp),
-        style = MaterialTheme.typography.titleLarge
-      )
-      Box(modifier = Modifier.weight(1f)) {
+fun GDXScreen(state: GDXState) {
+    Box(modifier = Modifier.fillMaxSize()) {
         GDXWidget(
-          modifier = Modifier.fillMaxSize(),
-          state = state
+            modifier = Modifier.fillMaxSize(),
+            state = state
         )
-      }
-      Button(
-        onClick = { /* do something */ },
-        modifier = Modifier
-          .fillMaxWidth()
-          .padding(16.dp)
-      ) {
-        Text(text = "Perform Action")
-      }
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(16.dp)
+        ) {
+            Text(
+                text = "Scene Editor",
+                style = MaterialTheme.typography.titleLarge
+            )
+            Spacer(modifier = Modifier.weight(1f)) // Empurra o botão para o final
+            Button(
+                onClick = { /* do something */ },
+                modifier = Modifier
+                    .fillMaxWidth()
+            ) {
+                Text(text = "Perform Action")
+            }
+        }
     }
-  }
+}
 
   override fun exit() {
     finish()
