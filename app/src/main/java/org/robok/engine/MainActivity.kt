@@ -92,8 +92,6 @@ fun GDXScreen(state: GDXState) {
                         id = R.drawable.ic_launcher_foreground),
                     contentDescription = "img")
             }
-       
-       )     
     }
 }
 
