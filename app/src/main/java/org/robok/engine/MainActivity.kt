@@ -18,12 +18,16 @@ package org.robok.engine
  */
 
 import android.os.Bundle
+
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
+
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.Button
+import androidx.compose.material3.IconButton
+
 import androidx.compose.runtime.Composable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
@@ -31,9 +35,15 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.size
+
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.res.painterResource
+
 import com.badlogic.gdx.backends.android.AndroidFragmentApplication
+
 import org.robok.engine.compose.GDXState
 import org.robok.engine.compose.GDXWidget
 import org.robok.engine.compose.rememberGDXState
@@ -72,24 +82,18 @@ fun GDXScreen(state: GDXState) {
             modifier = Modifier.fillMaxSize(),
             state = state
         )
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(16.dp)
-        ) {
-            Text(
-                text = "Scene Editor",
-                style = MaterialTheme.typography.titleLarge
-            )
-            Spacer(modifier = Modifier.weight(1f)) // Empurra o botão para o final
-            Button(
-                onClick = { /* do something */ },
-                modifier = Modifier
-                    .fillMaxWidth()
-            ) {
-                Text(text = "Perform Action")
+        
+        IconButton(
+            onClick = {},
+            modifier = Modifier.size(64.dp)){
+                
+                Image(
+                    painter = painterResource(
+                        id = R.drawable.ic_launcher_foreground),
+                    contentDescription = "img")
             }
-        }
+       
+       )     
     }
 }
 
