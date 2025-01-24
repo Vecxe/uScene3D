@@ -22,7 +22,7 @@ fun OptionItem(option: OptionModel) {
     verticalArrangement = Arrangement.Center,
     modifier = Modifier.padding(8.dp).width(100.dp).height(100.dp),
   ) {
-    Icon(painter = option.icon, contentDescription = option.text, modifier = Modifier.size(40.dp))
+    Icon(imageVector = option.icon, contentDescription = option.text, modifier = Modifier.size(40.dp))
     Spacer(modifier = Modifier.height(8.dp))
     Text(text = option.text, color = Color.Black)
   }
