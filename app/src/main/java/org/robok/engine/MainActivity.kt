@@ -34,13 +34,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.badlogic.gdx.backends.android.AndroidFragmentApplication
-import org.robok.engine.viewmodel.GDXViewModel
 import org.robok.engine.compose.components.gdx.GDXState
 import org.robok.engine.compose.components.gdx.GDXWidget
 import org.robok.engine.compose.components.gdx.rememberGDXState
 import org.robok.engine.feature.scene.editor.interfaces.EmptyObjectActionListener
 import org.robok.engine.feature.scene.editor.interfaces.ObjectListener
 import org.robok.engine.feature.scene.editor.objects.SceneObject
+import org.robok.engine.viewmodel.GDXViewModel
 
 class MainActivity : AppCompatActivity(), AndroidFragmentApplication.Callbacks {
 
