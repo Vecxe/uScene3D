@@ -17,8 +17,8 @@ package org.robok.engine
  *   along with Robok.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import android.os.Bundle
 import android.os.Build
+import android.os.Bundle
 import android.view.View
 import android.view.WindowInsets
 import android.view.WindowInsetsController
@@ -29,8 +29,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.IconButton
@@ -39,10 +39,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.zIndex
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.zIndex
 import com.badlogic.gdx.backends.android.AndroidFragmentApplication
 import org.robok.engine.compose.components.animation.ExpandAndShrink
 import org.robok.engine.compose.components.gdx.GDXState
@@ -129,14 +129,10 @@ class MainActivity : AppCompatActivity(), AndroidFragmentApplication.Callbacks {
   fun GDXBox() {
     val options = rememberOptions()
     Box(
-      modifier = Modifier.clip(
-        RoundedCornerShape(
-          topStart = 0.dp,
-          topEnd = 10.dp,
-          bottomStart = 0.dp,
-          bottomEnd = 10.dp
+      modifier =
+        Modifier.clip(
+          RoundedCornerShape(topStart = 0.dp, topEnd = 10.dp, bottomStart = 0.dp, bottomEnd = 10.dp)
         )
-      )
     ) {
       OptionsGrid(options)
     }
