@@ -30,12 +30,14 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.badlogic.gdx.backends.android.AndroidFragmentApplication
@@ -111,7 +113,18 @@ class MainActivity : AppCompatActivity(), AndroidFragmentApplication.Callbacks {
   @Composable
   fun GDXBox() {
     val options = rememberOptions()
-    OptionsGrid(options)
+    Box(
+      modifier = Modifier.clip(
+        RoundedCornerShape(
+          topStart = 0.dp,
+          topEnd = 10.dp,
+          bottomStart = 0.dp,
+          bottomEnd = 10.dp
+        )
+      )
+    ) {
+      OptionsGrid(options)
+    }
   }
 
   override fun exit() {
