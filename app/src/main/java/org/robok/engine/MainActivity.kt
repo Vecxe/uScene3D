@@ -118,6 +118,7 @@ class MainActivity : AppCompatActivity(), AndroidFragmentApplication.Callbacks {
             .padding(16.dp)
             .size(width = 200.dp, height = 400.dp)
             .background(MaterialTheme.colorScheme.surfaceContainerHigh)
+            .clip(RoundedCornerShape(topStart = 0.dp, topEnd = 10.dp, bottomStart = 0.dp, bottomEnd = 10.dp))
             .zIndex(1f),
       ) {
         GDXBox()
@@ -128,12 +129,7 @@ class MainActivity : AppCompatActivity(), AndroidFragmentApplication.Callbacks {
   @Composable
   fun GDXBox() {
     val options = rememberOptions()
-    Box(
-      modifier =
-        Modifier.clip(
-          RoundedCornerShape(topStart = 0.dp, topEnd = 10.dp, bottomStart = 0.dp, bottomEnd = 10.dp)
-        )
-    ) {
+    Box {
       OptionsGrid(options)
     }
   }
