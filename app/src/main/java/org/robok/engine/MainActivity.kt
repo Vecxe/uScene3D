@@ -129,7 +129,7 @@ class MainActivity : AppCompatActivity(), AndroidFragmentApplication.Callbacks {
   fun GDXBox() {
     val options = rememberOptions()
     Box {
-      OptionsGrid(options)
+      OptionsGrid(options = options)
     }
   }
 
