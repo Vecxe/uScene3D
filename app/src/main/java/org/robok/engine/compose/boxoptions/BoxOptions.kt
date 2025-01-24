@@ -7,8 +7,9 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.material.Icon
-import androidx.compose.material.Text
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.material3.Icon
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -18,14 +19,16 @@ import androidx.compose.ui.unit.dp
 import org.robok.engine.model.Option
 import org.robok.engine.R
 
-val options = listOf(
+val options = remember {
+  listOf(
     Option(icon = painterResource(id = R.drawable.ic_launcher_foreground), text = "Option 1"),
     Option(icon = painterResource(id = R.drawable.ic_launcher_foreground), text = "Option 2"),
     Option(icon = painterResource(id = R.drawable.ic_launcher_foreground), text = "Option 3"),
     Option(icon = painterResource(id = R.drawable.ic_launcher_foreground), text = "Option 4"),
     Option(icon = painterResource(id = R.drawable.ic_launcher_foreground), text = "Option 5"),
     Option(icon = painterResource(id = R.drawable.ic_launcher_foreground), text = "Option 6")
-)
+  )
+}
 
 @Composable
 fun OptionContainer(option: Option) {
