@@ -21,6 +21,7 @@ import android.os.Bundle
 
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.compose.setContent
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 
 import androidx.compose.material3.MaterialTheme
@@ -51,10 +52,13 @@ import org.robok.engine.compose.rememberGDXState
 import org.robok.engine.feature.scene.editor.interfaces.EmptyObjectActionListener
 import org.robok.engine.feature.scene.editor.interfaces.ObjectListener
 import org.robok.engine.feature.scene.editor.objects.SceneObject
-
+import org.robok.engine.compose.model.GdxViewModel
 
 class MainActivity : AppCompatActivity(), AndroidFragmentApplication.Callbacks {
 
+    
+  private val viewModel : GdxViewModel by viewModels()
+  
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     enableEdgeToEdge()
@@ -64,7 +68,7 @@ class MainActivity : AppCompatActivity(), AndroidFragmentApplication.Callbacks {
   @Composable
   fun Screen(savedInstanceState: Bundle?) {
     val state = rememberGDXState()
-
+    
     GDXScreen(state = state)
 
     state.objectListener =
@@ -78,6 +82,7 @@ class MainActivity : AppCompatActivity(), AndroidFragmentApplication.Callbacks {
 
   @Composable
 fun GDXScreen(state: GDXState) {
+
     Box(modifier = Modifier.fillMaxSize()) {
         GDXWidget(
             modifier = Modifier.fillMaxSize(),
@@ -85,7 +90,10 @@ fun GDXScreen(state: GDXState) {
         )
         
         IconButton(
-            onClick = {},
+            onClick = 
+            {
+                viewModel.setOptionsOpen(true)
+            },
             modifier = Modifier.size(64.dp).
             align(Alignment.TopEnd)
             ){
@@ -95,9 +103,15 @@ fun GDXScreen(state: GDXState) {
                         id = R.drawable.ic_launcher_foreground),
                     contentDescription = "img")
             }
+            
+            if(viewModel.isOptionsOpen) GdxBox()
     }
 }
 
+ @Composable
+ fun GdxBox(){
+        
+ }
   override fun exit() {
     finish()
   }
