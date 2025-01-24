@@ -1,4 +1,4 @@
-package org.robok.engine.compose.model
+package org.robok.engine.model
 
 import androidx.compose.ui.graphics.painter.Painter
 

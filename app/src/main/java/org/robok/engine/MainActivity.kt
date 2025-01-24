@@ -52,12 +52,11 @@ import org.robok.engine.compose.rememberGDXState
 import org.robok.engine.feature.scene.editor.interfaces.EmptyObjectActionListener
 import org.robok.engine.feature.scene.editor.interfaces.ObjectListener
 import org.robok.engine.feature.scene.editor.objects.SceneObject
-import org.robok.engine.compose.model.GdxViewModel
+import org.robok.engine.compose.model.GDXViewModel
 
 class MainActivity : AppCompatActivity(), AndroidFragmentApplication.Callbacks {
 
-    
-  private val viewModel : GdxViewModel by viewModels()
+  private val viewModel : GDXViewModel by viewModels()
   
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -81,7 +80,7 @@ class MainActivity : AppCompatActivity(), AndroidFragmentApplication.Callbacks {
   }
 
   @Composable
-fun GDXScreen(state: GDXState) {
+  fun GDXScreen(state: GDXState) {
 
     Box(modifier = Modifier.fillMaxSize()) {
         GDXWidget(
@@ -104,12 +103,12 @@ fun GDXScreen(state: GDXState) {
                     contentDescription = "img")
             }
             
-            if(viewModel.isOptionsOpen) GdxBox()
+            if(viewModel.isOptionsOpen) GDXBox()
     }
-}
+} 
 
  @Composable
- fun GdxBox(){
+ fun GDXBox(){
         
  }
   override fun exit() {
