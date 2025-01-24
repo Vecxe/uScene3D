@@ -1,4 +1,4 @@
-package org.robok.engine.compose
+package org.robok.engine.compose.components.gdx
 
 /*
  *  This file is part of Robok © 2024.

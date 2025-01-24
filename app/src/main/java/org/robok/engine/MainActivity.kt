@@ -34,10 +34,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.badlogic.gdx.backends.android.AndroidFragmentApplication
-import org.robok.engine.compose.GDXState
-import org.robok.engine.compose.GDXWidget
-import org.robok.engine.compose.model.GDXViewModel
-import org.robok.engine.compose.rememberGDXState
+import org.robok.engine.viewmodel.GDXViewModel
+import org.robok.engine.compose.components.gdx.GDXState
+import org.robok.engine.compose.components.gdx.GDXWidget
+import org.robok.engine.compose.components.gdx.rememberGDXState
 import org.robok.engine.feature.scene.editor.interfaces.EmptyObjectActionListener
 import org.robok.engine.feature.scene.editor.interfaces.ObjectListener
 import org.robok.engine.feature.scene.editor.objects.SceneObject
@@ -55,7 +55,6 @@ class MainActivity : AppCompatActivity(), AndroidFragmentApplication.Callbacks {
   @Composable
   fun Screen(savedInstanceState: Bundle?) {
     val state = rememberGDXState()
-
     GDXScreen(state = state)
 
     state.objectListener =
@@ -69,7 +68,6 @@ class MainActivity : AppCompatActivity(), AndroidFragmentApplication.Callbacks {
 
   @Composable
   fun GDXScreen(state: GDXState) {
-
     Box(modifier = Modifier.fillMaxSize()) {
       GDXWidget(modifier = Modifier.fillMaxSize(), state = state)
 

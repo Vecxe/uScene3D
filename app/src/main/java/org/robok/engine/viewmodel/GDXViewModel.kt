@@ -1,4 +1,4 @@
-package org.robok.engine.compose.model
+package org.robok.engine.viewmodel
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf

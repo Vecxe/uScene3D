@@ -1,4 +1,4 @@
-package org.robok.engine.compose.boxoptions
+package org.robok.engine.compose.components.options
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -19,21 +19,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import org.robok.engine.R
-import org.robok.engine.model.Option
-
-val options = remember {
-  listOf(
-    Option(icon = painterResource(id = R.drawable.ic_launcher_foreground), text = "Option 1"),
-    Option(icon = painterResource(id = R.drawable.ic_launcher_foreground), text = "Option 2"),
-    Option(icon = painterResource(id = R.drawable.ic_launcher_foreground), text = "Option 3"),
-    Option(icon = painterResource(id = R.drawable.ic_launcher_foreground), text = "Option 4"),
-    Option(icon = painterResource(id = R.drawable.ic_launcher_foreground), text = "Option 5"),
-    Option(icon = painterResource(id = R.drawable.ic_launcher_foreground), text = "Option 6"),
-  )
-}
 
 @Composable
-fun OptionContainer(option: Option) {
+fun OptionItem(option: OptionModel) {
   Column(
     horizontalAlignment = Alignment.CenterHorizontally,
     verticalArrangement = Arrangement.Center,
@@ -42,18 +30,5 @@ fun OptionContainer(option: Option) {
     Icon(painter = option.icon, contentDescription = option.text, modifier = Modifier.size(40.dp))
     Spacer(modifier = Modifier.height(8.dp))
     Text(text = option.text, color = Color.Black)
-  }
-}
-
-@Composable
-fun OptionGrid(options: List<Option>) {
-  val rows = options.chunked(2) // Divide a lista em sublistas com 2 elementos (duas colunas)
-
-  Column {
-    rows.forEach { row ->
-      Row(horizontalArrangement = Arrangement.spacedBy(16.dp), modifier = Modifier.fillMaxWidth()) {
-        row.forEach { option -> OptionContainer(option = option) }
-      }
-    }
   }
 }
