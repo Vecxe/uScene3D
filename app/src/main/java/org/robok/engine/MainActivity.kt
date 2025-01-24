@@ -18,6 +18,10 @@ package org.robok.engine
  */
 
 import android.os.Bundle
+import android.os.Build
+import android.view.View
+import android.view.WindowInsets
+import android.view.WindowInsetsController
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
@@ -54,6 +58,7 @@ class MainActivity : AppCompatActivity(), AndroidFragmentApplication.Callbacks {
 
   @Composable
   fun Screen(savedInstanceState: Bundle?) {
+    SideEffect { hideSystemUI() }
     val state = rememberGDXState()
     GDXScreen(state = state)
 
@@ -66,13 +71,28 @@ class MainActivity : AppCompatActivity(), AndroidFragmentApplication.Callbacks {
     state.objectActionListener = state.fragment?.sceneEditorView ?: EmptyObjectActionListener()
   }
 
+  /** Hide phone ui to better experience */
+  private fun hideSystemUI() {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+      window.setDecorFitsSystemWindows(false)
+      window.insetsController?.let { controller ->
+        controller.hide(WindowInsets.Type.statusBars() or WindowInsets.Type.navigationBars())
+        controller.systemBarsBehavior = WindowInsetsController.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
+      }
+    } else {
+      @Suppress("DEPRECATION")
+      window.decorView.systemUiVisibility =
+        (View.SYSTEM_UI_FLAG_HIDE_NAVIGATION or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY)
+    }
+  }
+
   @Composable
   fun GDXScreen(state: GDXState) {
     Box(modifier = Modifier.fillMaxSize()) {
       GDXWidget(modifier = Modifier.fillMaxSize(), state = state)
 
       IconButton(
-        onClick = { viewModel.setOptionsOpen(true) },
+        onClick = { viewModel.setOptionsOpen(!viewModel.isOptionsOpen) },
         modifier = Modifier.size(64.dp).align(Alignment.TopEnd),
       ) {
         Image(
