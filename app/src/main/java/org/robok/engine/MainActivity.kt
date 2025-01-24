@@ -27,6 +27,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.size
@@ -37,10 +38,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.zIndex
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.badlogic.gdx.backends.android.AndroidFragmentApplication
+import org.robok.engine.compose.components.animatiom.ExpandAndShrink
 import org.robok.engine.compose.components.gdx.GDXState
 import org.robok.engine.compose.components.gdx.GDXWidget
 import org.robok.engine.compose.components.gdx.rememberGDXState
@@ -106,7 +109,18 @@ class MainActivity : AppCompatActivity(), AndroidFragmentApplication.Callbacks {
         )
       }
 
-      if (viewModel.isOptionsOpen) GDXBox()
+      ExpandAndShrink(
+        visible = viewModel.isOptionsOpen,
+        vertically = false,
+        modifier =
+          Modifier.align(Alignment.TopEnd)
+            .padding(16.dp)
+            .size(width = 200.dp, height = 400.dp)
+            .background(MaterialTheme.colorScheme.surfaceContainerHigh)
+            .zIndex(1f),
+      ) {
+        GDXBox()
+      }
     }
   }
 
