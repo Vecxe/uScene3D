@@ -42,6 +42,8 @@ import com.badlogic.gdx.backends.android.AndroidFragmentApplication
 import org.robok.engine.compose.components.gdx.GDXState
 import org.robok.engine.compose.components.gdx.GDXWidget
 import org.robok.engine.compose.components.gdx.rememberGDXState
+import org.robok.engine.compose.components.options.OptionsGrid
+import org.robok.engine.compose.components.options.rememberOptions
 import org.robok.engine.feature.scene.editor.interfaces.EmptyObjectActionListener
 import org.robok.engine.feature.scene.editor.interfaces.ObjectListener
 import org.robok.engine.feature.scene.editor.objects.SceneObject
@@ -106,7 +108,11 @@ class MainActivity : AppCompatActivity(), AndroidFragmentApplication.Callbacks {
     }
   }
 
-  @Composable fun GDXBox() {}
+  @Composable
+  fun GDXBox() {
+    val options = rememberOptions()
+    OptionsGrid(options)
+  }
 
   override fun exit() {
     finish()
