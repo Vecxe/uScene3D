@@ -33,11 +33,11 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun OptionItem(option: OptionModel) {
+fun OptionItem(modifier: Modifier = Modifier, option: OptionModel) {
   Column(
     horizontalAlignment = Alignment.CenterHorizontally,
     verticalArrangement = Arrangement.Center,
-    modifier = Modifier.padding(8.dp).width(100.dp).height(100.dp),
+    modifier = modifier.padding(8.dp).width(100.dp).height(100.dp),
   ) {
     Icon(
       imageVector = option.icon,
