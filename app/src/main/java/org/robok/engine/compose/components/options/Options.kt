@@ -1,11 +1,9 @@
 package org.robok.engine.compose.components.options
 
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
-import androidx.compose.ui.res.painterResource
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Android
-import org.robok.engine.R
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 
 @Composable
 fun rememberOptions() = remember {
