@@ -29,6 +29,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -43,7 +44,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.badlogic.gdx.backends.android.AndroidFragmentApplication
-import org.robok.engine.compose.components.animatiom.ExpandAndShrink
+import org.robok.engine.compose.components.animation.ExpandAndShrink
 import org.robok.engine.compose.components.gdx.GDXState
 import org.robok.engine.compose.components.gdx.GDXWidget
 import org.robok.engine.compose.components.gdx.rememberGDXState
