@@ -29,7 +29,6 @@ import net.mgsx.gltf.scene3d.attributes.PBRTextureAttribute
 import net.mgsx.gltf.scene3d.scene.SceneManager
 import net.mgsx.gltf.scene3d.scene.SceneSkybox
 import net.mgsx.gltf.scene3d.utils.EnvironmentUtil
-import org.robok.hdritocubemap.HdriToCubemap
 import org.robok.engine.feature.scene.editor.controller.CameraInputController2
 import org.robok.engine.feature.scene.editor.drawing.DrawingRenderer
 import org.robok.engine.feature.scene.editor.interfaces.ObjectActionListener
@@ -37,6 +36,7 @@ import org.robok.engine.feature.scene.editor.interfaces.ObjectListener
 import org.robok.engine.feature.scene.editor.objects.ObjectCommand
 import org.robok.engine.feature.scene.editor.objects.ObjectsCreator
 import org.robok.engine.feature.scene.editor.objects.SceneObject
+import org.robok.hdritocubemap.HdriToCubemap
 
 class SceneEditorView : ApplicationAdapter(), ObjectListener, ObjectActionListener {
 

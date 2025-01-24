@@ -18,46 +18,34 @@ package org.robok.engine
  */
 
 import android.os.Bundle
-
-import androidx.activity.enableEdgeToEdge
 import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
-import androidx.compose.material3.Button
-import androidx.compose.material3.IconButton
-
-import androidx.compose.runtime.Composable
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.size
-
-import androidx.compose.ui.Modifier
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.unit.dp
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
-
+import androidx.compose.ui.unit.dp
 import com.badlogic.gdx.backends.android.AndroidFragmentApplication
-
 import org.robok.engine.compose.GDXState
 import org.robok.engine.compose.GDXWidget
+import org.robok.engine.compose.model.GDXViewModel
 import org.robok.engine.compose.rememberGDXState
 import org.robok.engine.feature.scene.editor.interfaces.EmptyObjectActionListener
 import org.robok.engine.feature.scene.editor.interfaces.ObjectListener
 import org.robok.engine.feature.scene.editor.objects.SceneObject
-import org.robok.engine.compose.model.GDXViewModel
 
 class MainActivity : AppCompatActivity(), AndroidFragmentApplication.Callbacks {
 
-  private val viewModel : GDXViewModel by viewModels()
-  
+  private val viewModel: GDXViewModel by viewModels()
+
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     enableEdgeToEdge()
@@ -67,7 +55,7 @@ class MainActivity : AppCompatActivity(), AndroidFragmentApplication.Callbacks {
   @Composable
   fun Screen(savedInstanceState: Bundle?) {
     val state = rememberGDXState()
-    
+
     GDXScreen(state = state)
 
     state.objectListener =
@@ -83,34 +71,24 @@ class MainActivity : AppCompatActivity(), AndroidFragmentApplication.Callbacks {
   fun GDXScreen(state: GDXState) {
 
     Box(modifier = Modifier.fillMaxSize()) {
-        GDXWidget(
-            modifier = Modifier.fillMaxSize(),
-            state = state
-        )
-        
-        IconButton(
-            onClick = 
-            {
-                viewModel.setOptionsOpen(true)
-            },
-            modifier = Modifier.size(64.dp).
-            align(Alignment.TopEnd)
-            ){
-                
-                Image(
-                    painter = painterResource(
-                        id = R.drawable.ic_launcher_foreground),
-                    contentDescription = "img")
-            }
-            
-            if(viewModel.isOptionsOpen) GDXBox()
-    }
-} 
+      GDXWidget(modifier = Modifier.fillMaxSize(), state = state)
 
- @Composable
- fun GDXBox(){
-        
- }
+      IconButton(
+        onClick = { viewModel.setOptionsOpen(true) },
+        modifier = Modifier.size(64.dp).align(Alignment.TopEnd),
+      ) {
+        Image(
+          painter = painterResource(id = R.drawable.ic_launcher_foreground),
+          contentDescription = "img",
+        )
+      }
+
+      if (viewModel.isOptionsOpen) GDXBox()
+    }
+  }
+
+  @Composable fun GDXBox() {}
+
   override fun exit() {
     finish()
   }
