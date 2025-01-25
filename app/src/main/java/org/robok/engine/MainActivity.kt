@@ -106,6 +106,10 @@ class MainActivity : AppCompatActivity(), AndroidFragmentApplication.Callbacks {
     Box(modifier = Modifier.fillMaxSize()) {
       GDXWidget(modifier = Modifier.fillMaxSize(), state = state)
 
+      ExpandAndShrink(visible = viewModel.isOptionsOpen, vertically = false) {
+        GDXBox(modifier = Modifier.align(Alignment.TopEnd).padding(16.dp))
+      }
+
       IconButton(
         onClick = { viewModel.setOptionsOpen(!viewModel.isOptionsOpen) },
         modifier = Modifier.size(70.dp).align(Alignment.TopEnd),
@@ -115,10 +119,6 @@ class MainActivity : AppCompatActivity(), AndroidFragmentApplication.Callbacks {
           contentDescription = stringResource(R.string.common_word_more),
           colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.onSurface)
         )
-      }
-
-      ExpandAndShrink(visible = viewModel.isOptionsOpen, vertically = false) {
-        GDXBox(modifier = Modifier.align(Alignment.TopEnd).padding(16.dp))
       }
     }
   }
