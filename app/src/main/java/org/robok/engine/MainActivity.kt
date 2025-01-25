@@ -46,6 +46,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.badlogic.gdx.backends.android.AndroidFragmentApplication
+import org.robok.engine.compose.theme.AppTheme
 import org.robok.engine.compose.components.animation.ExpandAndShrink
 import org.robok.engine.compose.components.gdx.GDXState
 import org.robok.engine.compose.components.gdx.GDXWidget
@@ -64,7 +65,7 @@ class MainActivity : AppCompatActivity(), AndroidFragmentApplication.Callbacks {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     enableEdgeToEdge()
-    setContent { MaterialTheme { Screen(savedInstanceState) } }
+    setContent { AppTheme { Screen(savedInstanceState) } }
   }
 
   /** Hide phone ui to better experience */
