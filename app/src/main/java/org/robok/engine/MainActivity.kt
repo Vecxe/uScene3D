@@ -112,7 +112,7 @@ class MainActivity : AppCompatActivity(), AndroidFragmentApplication.Callbacks {
       ExpandAndShrink(visible = viewModel.isOptionsOpen, vertically = false) {
         GDXBox(
           modifier =
-            Modifier.align(Alignment.End)
+            Modifier.align(Alignment.CenterEnd)
               .padding(16.dp)
               .background(MaterialTheme.colorScheme.surfaceContainerHigh)
               .clip(RoundedCornerShape(20.dp))
