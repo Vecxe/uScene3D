@@ -100,21 +100,23 @@ class MainActivity : AppCompatActivity(), AndroidFragmentApplication.Callbacks {
     Box(modifier = Modifier.fillMaxSize()) {
       GDXWidget(modifier = Modifier.fillMaxSize(), state = state)
 
-      IconButton(
-        onClick = { viewModel.setOptionsOpen(!viewModel.isOptionsOpen) },
-        modifier = Modifier.size(64.dp).align(Alignment.TopEnd),
-      ) {
-        Image(
-          painter = painterResource(id = R.drawable.ic_launcher_foreground),
-          contentDescription = "img",
-        )
-      }
+      Row {
+        ExpandAndShrink(
+          visible = viewModel.isOptionsOpen,
+          vertically = false,
+        ) {
+          GDXBox()
+        }
 
-      ExpandAndShrink(
-        visible = viewModel.isOptionsOpen,
-        vertically = false,
-      ) {
-        GDXBox()
+        IconButton(
+          onClick = { viewModel.setOptionsOpen(!viewModel.isOptionsOpen) },
+          modifier = Modifier.size(64.dp).align(Alignment.TopEnd),
+        ) {
+          Image(
+            painter = painterResource(id = R.drawable.ic_launcher_foreground),
+            contentDescription = "img",
+          )
+        }
       }
     }
   }
