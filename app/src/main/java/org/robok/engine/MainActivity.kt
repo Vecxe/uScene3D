@@ -109,7 +109,7 @@ class MainActivity : AppCompatActivity(), AndroidFragmentApplication.Callbacks {
       }
 
       ExpandAndShrink(visible = viewModel.isOptionsOpen, vertically = false) {
-        GDXBox(modifier = Modifier.align(Alignment.CenterEnd).padding(16.dp))
+        GDXBox(modifier = Modifier.align(Alignment.TopEnd).padding(16.dp))
       }
     }
   }
