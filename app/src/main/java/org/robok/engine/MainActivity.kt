@@ -29,6 +29,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -122,7 +123,7 @@ class MainActivity : AppCompatActivity(), AndroidFragmentApplication.Callbacks {
   }
 
   @Composable
-  fun GDXBox() {
+  private fun BoxScope.GDXBox() {
     val options = rememberOptions()
     Box (
       modifier = Modifier.align(Alignment.TopEnd)
