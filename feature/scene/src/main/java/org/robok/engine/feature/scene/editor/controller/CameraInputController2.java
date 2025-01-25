@@ -126,10 +126,6 @@ public class CameraInputController2 extends GestureDetector {
     private boolean isZoom;
     private CameraInputController2.Object object;
 
-    // colocar caso nao for tocado
-    /*
-
-    */
     @Override
     public boolean touchDown(float x, float y, int pointer, int button) {
       previousZoom = 0;
@@ -188,6 +184,7 @@ public class CameraInputController2 extends GestureDetector {
 
     @Override
     public boolean zoom(float initialDistance, float distance) {
+      objectListener.onZoom(initialDistance, distance);
       float newZoom = distance - initialDistance;
       float amount = newZoom - previousZoom;
       previousZoom = newZoom;
@@ -210,6 +207,7 @@ public class CameraInputController2 extends GestureDetector {
     @Override
     public boolean pinch(
         Vector2 initialPointer1, Vector2 initialPointer2, Vector2 pointer1, Vector2 pointer2) {
+      objectListener.onPinch(initialPointer1, initialPointer2, pointer1, pointer2);
       if (!controller.multiTouch) return false;
 
       if (previousZoom == 0) {

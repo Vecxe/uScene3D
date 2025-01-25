@@ -17,10 +17,13 @@ package org.robok.engine.feature.scene.editor.interfaces
  *   along with Robok.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+import com.badlogic.gdx.math.Vector2
 import org.robok.engine.feature.scene.editor.objects.SceneObject
 
 /** an empty implementation of ObjectListener to be used if is null */
 class EmptyObjectListener : ObjectListener {
   override fun onTap(x: Float, y: Float, count: Int, button: Int) = Unit
   override fun onObjectClick(sceneObject: SceneObject, x: Float, y: Float) = Unit
+  override fun onZoom(initialDistance: Float, distance: Float) = Unit
+  override fun onPinch(initialPointer1: Vector2, initialPointer2: Vector2, pointer1: Vector2, pointer2: Vector2) = Unit
 }
