@@ -101,7 +101,7 @@ class MainActivity : AppCompatActivity(), AndroidFragmentApplication.Callbacks {
 
       IconButton(
         onClick = { viewModel.setOptionsOpen(!viewModel.isOptionsOpen) },
-        modifier = Modifier.size(64.dp).align(Alignment.TopEnd),
+        modifier = Modifier.size(70.dp).align(Alignment.TopEnd),
       ) {
         Image(
           painter = painterResource(id = R.drawable.ic_launcher_foreground),
@@ -112,7 +112,7 @@ class MainActivity : AppCompatActivity(), AndroidFragmentApplication.Callbacks {
       ExpandAndShrink(visible = viewModel.isOptionsOpen, vertically = false) {
         GDXBox(
           modifier =
-            Modifier.align(Alignment.TopEnd)
+            Modifier.align(Alignment.End)
               .padding(16.dp)
               .background(MaterialTheme.colorScheme.surfaceContainerHigh)
               .clip(RoundedCornerShape(20.dp))

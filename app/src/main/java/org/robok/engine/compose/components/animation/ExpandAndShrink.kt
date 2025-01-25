@@ -33,6 +33,7 @@ import androidx.compose.ui.Modifier
  * respectively.
  *
  * @param visible Defines whether the content should be visible
+ * @param vertically Defines if the anim is vertical or horizontal
  * @param content Content to appear or disappear based on the value of [visible]
  */
 @Composable
