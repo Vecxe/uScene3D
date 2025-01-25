@@ -91,6 +91,9 @@ class MainActivity : AppCompatActivity(), AndroidFragmentApplication.Callbacks {
 
     state.objectListener =
       object : ObjectListener {
+        override fun onGDXClick(x: Float, y: Float) {
+          viewModel.setOptionsOpen(false) 
+        }
         override fun onObjectClick(sceneObject: SceneObject, x: Float, y: Float) {
           // do someting when user click in object
         }
