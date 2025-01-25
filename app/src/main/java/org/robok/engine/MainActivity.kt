@@ -118,7 +118,7 @@ class MainActivity : AppCompatActivity(), AndroidFragmentApplication.Callbacks {
             .padding(16.dp)
             .background(MaterialTheme.colorScheme.surfaceContainerHigh)
             .clip(RoundedCornerShape(topStart = 0.dp, topEnd = 10.dp, bottomStart = 0.dp, bottomEnd = 10.dp))
-            .zIndex(1f),
+            // .zIndex(1f),
       ) {
         GDXBox()
       }
