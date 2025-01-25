@@ -64,21 +64,6 @@ class MainActivity : AppCompatActivity(), AndroidFragmentApplication.Callbacks {
     setContent { MaterialTheme { Screen(savedInstanceState) } }
   }
 
-  @Composable
-  fun Screen(savedInstanceState: Bundle?) {
-    SideEffect { hideSystemUI() }
-    val state = rememberGDXState()
-    GDXScreen(state = state)
-
-    state.objectListener =
-      object : ObjectListener {
-        override fun onObjectClick(sceneObject: SceneObject, x: Float, y: Float) {
-          // do someting when user click in object
-        }
-      }
-    state.objectActionListener = state.fragment?.sceneEditorView ?: EmptyObjectActionListener()
-  }
-
   /** Hide phone ui to better experience */
   private fun hideSystemUI() {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
@@ -92,6 +77,21 @@ class MainActivity : AppCompatActivity(), AndroidFragmentApplication.Callbacks {
       window.decorView.systemUiVisibility =
         (View.SYSTEM_UI_FLAG_HIDE_NAVIGATION or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY)
     }
+  }
+
+  @Composable
+  fun Screen(savedInstanceState: Bundle?) {
+    SideEffect { hideSystemUI() }
+    val state = rememberGDXState()
+    GDXScreen(state = state)
+
+    state.objectListener =
+      object : ObjectListener {
+        override fun onObjectClick(sceneObject: SceneObject, x: Float, y: Float) {
+          // do someting when user click in object
+        }
+      }
+    state.objectActionListener = state.fragment?.sceneEditorView ?: EmptyObjectActionListener()
   }
 
   @Composable
@@ -115,14 +115,7 @@ class MainActivity : AppCompatActivity(), AndroidFragmentApplication.Callbacks {
             Modifier.align(Alignment.TopEnd)
               .padding(16.dp)
               .background(MaterialTheme.colorScheme.surfaceContainerHigh)
-              .clip(
-                RoundedCornerShape(
-                  topStart = 0.dp,
-                  topEnd = 10.dp,
-                  bottomStart = 0.dp,
-                  bottomEnd = 10.dp,
-                )
-              )
+              .clip(RoundedCornerShape(20.dp))
         )
       }
     }
@@ -131,7 +124,7 @@ class MainActivity : AppCompatActivity(), AndroidFragmentApplication.Callbacks {
   @Composable
   fun GDXBox(modifier: Modifier = Modifier) {
     val options = rememberOptions()
-    Box(modifier = modifier) { OptionsGrid(options = options) }
+    OptionsGrid(modifier = modifier, options = options)
   }
 
   override fun exit() {
