@@ -20,6 +20,6 @@ package org.robok.engine.feature.scene.editor.interfaces
 import org.robok.engine.feature.scene.editor.objects.SceneObject
 
 interface ObjectListener {
-  fun onGDXClick(x: Float, y: Float) = Unit
+  fun onTap(x: Float, y: Float, count: Int, button: Int) = Unit
   fun onObjectClick(sceneObject: SceneObject, x: Float, y: Float)
 }

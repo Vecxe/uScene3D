@@ -142,9 +142,8 @@ public class CameraInputController2 extends GestureDetector {
 
     @Override
     public boolean tap(float x, float y, int count, int button) {
+      objectListener.onTap(x, y, count, button);
       if (count == 1) {
-        objectListener.onGDXClick(x, y);
-
         object = new CameraInputController2.Object(controller.camera);
         SceneObject sc = object.getObjectFromTap(x, y);
         if (sc != null) {

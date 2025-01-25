@@ -116,8 +116,8 @@ class SceneEditorView : ApplicationAdapter(), ObjectListener, ObjectActionListen
   }
 
   // from ObjectListener
-  override fun onGDXClick(x: Float, y: Float) {
-    /* call ui listener */ objectListener.onGDXClick(x, y)
+  override fun onTap(x: Float, y: Float, count: Int, button: Int) {
+    /* call ui listener */ objectListener.onTap(x, y, count, button)
   }
 
   // from ObjectListener
