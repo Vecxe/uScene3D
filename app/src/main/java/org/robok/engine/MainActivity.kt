@@ -27,7 +27,6 @@ import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -40,7 +39,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.badlogic.gdx.backends.android.AndroidFragmentApplication
@@ -111,11 +109,7 @@ class MainActivity : AppCompatActivity(), AndroidFragmentApplication.Callbacks {
       }
 
       ExpandAndShrink(visible = viewModel.isOptionsOpen, vertically = false) {
-        GDXBox(
-          modifier =
-            Modifier.align(Alignment.CenterEnd)
-              .padding(16.dp)
-        )
+        GDXBox(modifier = Modifier.align(Alignment.CenterEnd).padding(16.dp))
       }
     }
   }
@@ -126,7 +120,7 @@ class MainActivity : AppCompatActivity(), AndroidFragmentApplication.Callbacks {
     Surface(
       modifier = modifier,
       shape = RoundedCornerShape(20.dp),
-      color = MaterialTheme.colorScheme.surfaceContainerHigh
+      color = MaterialTheme.colorScheme.surfaceContainerHigh,
     ) {
       OptionsGrid(modifier = modifier, options = options)
     }

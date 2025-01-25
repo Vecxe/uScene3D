@@ -20,7 +20,6 @@ package org.robok.engine.compose.components.options
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -32,7 +31,7 @@ fun OptionsGrid(modifier: Modifier = Modifier, options: List<OptionModel>) {
   Column(modifier = modifier) {
     rows.forEach { row ->
       Row(
-        horizontalArrangement = Arrangement.spacedBy(16.dp),
+        horizontalArrangement = Arrangement.spacedBy(16.dp)
         // modifier = Modifier.fillMaxWidth()
       ) {
         row.forEach { option -> OptionItem(option = option) }
