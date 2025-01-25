@@ -113,12 +113,6 @@ class MainActivity : AppCompatActivity(), AndroidFragmentApplication.Callbacks {
       ExpandAndShrink(
         visible = viewModel.isOptionsOpen,
         vertically = false,
-        modifier =
-          Modifier.align(Alignment.TopEnd)
-            .padding(16.dp)
-            .background(MaterialTheme.colorScheme.surfaceContainerHigh)
-            .clip(RoundedCornerShape(topStart = 0.dp, topEnd = 10.dp, bottomStart = 0.dp, bottomEnd = 10.dp))
-            // .zIndex(1f),
       ) {
         GDXBox()
       }
@@ -128,7 +122,12 @@ class MainActivity : AppCompatActivity(), AndroidFragmentApplication.Callbacks {
   @Composable
   fun GDXBox() {
     val options = rememberOptions()
-    Box {
+    Box (
+      modifier = Modifier.align(Alignment.TopEnd)
+        .padding(16.dp)
+        .background(MaterialTheme.colorScheme.surfaceContainerHigh)
+        .clip(RoundedCornerShape(20.dp))
+    ) {
       OptionsGrid(options = options)
     }
   }
