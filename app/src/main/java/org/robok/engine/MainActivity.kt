@@ -44,7 +44,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.zIndex
 import com.badlogic.gdx.backends.android.AndroidFragmentApplication
 import org.robok.engine.compose.components.animation.ExpandAndShrink
 import org.robok.engine.compose.components.gdx.GDXState
@@ -103,12 +102,7 @@ class MainActivity : AppCompatActivity(), AndroidFragmentApplication.Callbacks {
       GDXWidget(modifier = Modifier.fillMaxSize(), state = state)
 
       Row {
-        ExpandAndShrink(
-          visible = viewModel.isOptionsOpen,
-          vertically = false,
-        ) {
-          GDXBox()
-        }
+        ExpandAndShrink(visible = viewModel.isOptionsOpen, vertically = false) { GDXBox() }
 
         IconButton(
           onClick = { viewModel.setOptionsOpen(!viewModel.isOptionsOpen) },
@@ -126,11 +120,12 @@ class MainActivity : AppCompatActivity(), AndroidFragmentApplication.Callbacks {
   @Composable
   private fun BoxScope.GDXBox() {
     val options = rememberOptions()
-    Box (
-      modifier = Modifier.align(Alignment.TopEnd)
-        .padding(16.dp)
-        .background(MaterialTheme.colorScheme.surfaceContainerHigh)
-        .clip(RoundedCornerShape(20.dp))
+    Box(
+      modifier =
+        Modifier.align(Alignment.TopEnd)
+          .padding(16.dp)
+          .background(MaterialTheme.colorScheme.surfaceContainerHigh)
+          .clip(RoundedCornerShape(20.dp))
     ) {
       OptionsGrid(options = options)
     }
