@@ -35,6 +35,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.Alignment
@@ -114,8 +115,6 @@ class MainActivity : AppCompatActivity(), AndroidFragmentApplication.Callbacks {
           modifier =
             Modifier.align(Alignment.CenterEnd)
               .padding(16.dp)
-              .background(MaterialTheme.colorScheme.surfaceContainerHigh)
-              .clip(RoundedCornerShape(20.dp))
         )
       }
     }
@@ -124,7 +123,13 @@ class MainActivity : AppCompatActivity(), AndroidFragmentApplication.Callbacks {
   @Composable
   fun GDXBox(modifier: Modifier = Modifier) {
     val options = rememberOptions()
-    OptionsGrid(modifier = modifier, options = options)
+    Surface(
+      modifier = modifier,
+      shape = RoundedCornerShape(20.dp),
+      color = MaterialTheme.colorScheme.surfaceContainerHigh
+    ) {
+      OptionsGrid(modifier = modifier, options = options)
+    }
   }
 
   override fun exit() {
