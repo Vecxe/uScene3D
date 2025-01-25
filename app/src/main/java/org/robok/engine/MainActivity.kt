@@ -41,6 +41,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -107,7 +108,8 @@ class MainActivity : AppCompatActivity(), AndroidFragmentApplication.Callbacks {
       ) {
         Image(
           imageVector = Icons.Rounded.MoreVert,
-          contentDescription = stringResource(R.string.common_word_more)
+          contentDescription = stringResource(R.string.common_word_more),
+          colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.onSurface)
         )
       }
 
@@ -123,7 +125,7 @@ class MainActivity : AppCompatActivity(), AndroidFragmentApplication.Callbacks {
     Surface(
       modifier = modifier,
       shape = RoundedCornerShape(20.dp),
-      color = MaterialTheme.colorScheme.surfaceContainerHigh,
+      color = MaterialTheme.colorScheme.surfaceContainerHigh
     ) {
       OptionsGrid(modifier = modifier, options = options)
     }
