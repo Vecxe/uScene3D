@@ -32,6 +32,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androirx.compose.material.icons.Icons
+import androirx.compose.material.icons.rounded.MoreVert
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -40,6 +42,7 @@ import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.badlogic.gdx.backends.android.AndroidFragmentApplication
 import org.robok.engine.compose.components.animation.ExpandAndShrink
@@ -103,8 +106,8 @@ class MainActivity : AppCompatActivity(), AndroidFragmentApplication.Callbacks {
         modifier = Modifier.size(70.dp).align(Alignment.TopEnd),
       ) {
         Image(
-          painter = painterResource(id = R.drawable.ic_launcher_foreground),
-          contentDescription = "img",
+          imageVector = Icons.Rounded.MoreVert,
+          contentDescription = stringResource(R.string.common_word_more)
         )
       }
 
