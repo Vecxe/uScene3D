@@ -45,6 +45,6 @@ fun OptionItem(modifier: Modifier = Modifier, option: OptionModel) {
       modifier = Modifier.size(40.dp),
     )
     Spacer(modifier = Modifier.height(8.dp))
-    Text(text = option.text, color = Color.Black)
+    Text(text = option.text)
   }
 }
