@@ -31,6 +31,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.text.style.TextAlign
 
 @Composable
 fun OptionItem(modifier: Modifier = Modifier, option: OptionModel) {
@@ -48,7 +49,8 @@ fun OptionItem(modifier: Modifier = Modifier, option: OptionModel) {
     Text(
         text = option.text,
         fontSize = 14.sp,
-        modifier = Modifier.width(70.dp)
+        modifier = Modifier.width(70.dp),
+        textAlign = TextAlign.Center
         )
   }
 }
