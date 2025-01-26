@@ -44,6 +44,9 @@ fun OptionItem(modifier: Modifier = Modifier, option: OptionModel) {
       modifier = Modifier.size(40.dp),
     )
     Spacer(modifier = Modifier.height(8.dp))
-    Text(text = option.text)
+    Text(
+        text = option.text
+        fontSize = 15.sp
+        )
   }
 }
