@@ -93,6 +93,7 @@ class MainActivity : AppCompatActivity(), AndroidFragmentApplication.Callbacks {
   fun Screen(savedInstanceState: Bundle?) {
     SideEffect { hideSystemUI() }
     val state = rememberGDXState()
+    GDXLoadingBox(state)
     GDXScreen(state = state)
 
     state.objectListener =
@@ -120,7 +121,6 @@ class MainActivity : AppCompatActivity(), AndroidFragmentApplication.Callbacks {
   @Composable
   fun GDXScreen(state: GDXState) {
     Box(modifier = Modifier.fillMaxSize()) {
-      GDXLoadingBox(state)
       GDXWidget(modifier = Modifier.fillMaxSize(), state = state)
 
       ExpandAndShrink(
