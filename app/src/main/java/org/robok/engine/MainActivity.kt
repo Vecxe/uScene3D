@@ -47,6 +47,7 @@ import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.badlogic.gdx.backends.android.AndroidFragmentApplication
@@ -123,7 +124,7 @@ class MainActivity : AppCompatActivity(), AndroidFragmentApplication.Callbacks {
 
       ExpandAndShrink(
         modifier = Modifier.align(Alignment.CenterEnd),
-        visible = gdxViewModelisOptionsOpen,
+        visible = gdxViewModel.isOptionsOpen,
         vertically = false,
       ) {
         OptionsBox(modifier = Modifier.padding(10.dp))
@@ -131,11 +132,11 @@ class MainActivity : AppCompatActivity(), AndroidFragmentApplication.Callbacks {
 
       ExpandAndShrink(
         modifier = Modifier.align(Alignment.TopEnd),
-        visible = !gdxViewModelisOptionsOpen,
+        visible = !gdxViewModel.isOptionsOpen,
         vertically = false,
       ) {
         IconButton(
-          onClick = { gdxViewModelsetOptionsOpen(!gdxViewModelisOptionsOpen) },
+          onClick = { gdxViewModelsetOptionsOpen(!gdxViewModel.isOptionsOpen) },
           modifier = Modifier.size(80.dp).align(Alignment.TopEnd),
         ) {
           Image(
