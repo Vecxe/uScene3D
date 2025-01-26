@@ -48,7 +48,7 @@ fun OptionItem(modifier: Modifier = Modifier, option: OptionModel) {
     Spacer(modifier = Modifier.height(8.dp))
     Text(
         text = option.text,
-        fontSize = 14.sp,
+        fontSize = 12.sp,
         modifier = Modifier.width(70.dp),
         textAlign = TextAlign.Center
         )
