@@ -111,7 +111,7 @@ class MainActivity : AppCompatActivity(), AndroidFragmentApplication.Callbacks {
         ) {}
 
         override fun onTouchDown(x: Float, y: Float, count: Int, button: Int) {
-          gdxViewModelsetOptionsOpen(false)
+          gdxViewModel.setOptionsOpen(false)
         }
       }
     state.objectActionListener = state.fragment?.sceneEditorView ?: EmptyObjectActionListener()
@@ -136,7 +136,7 @@ class MainActivity : AppCompatActivity(), AndroidFragmentApplication.Callbacks {
         vertically = false,
       ) {
         IconButton(
-          onClick = { gdxViewModelsetOptionsOpen(!gdxViewModel.isOptionsOpen) },
+          onClick = { gdxViewModel.setOptionsOpen(!gdxViewModel.isOptionsOpen) },
           modifier = Modifier.size(80.dp).align(Alignment.TopEnd),
         ) {
           Image(
