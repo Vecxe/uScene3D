@@ -48,6 +48,7 @@ fun OptionItem(modifier: Modifier = Modifier, option: OptionModel) {
     Text(
         text = option.text,
         fontSize = 14.sp
+        modifier = Modifier.width(70.dp)
         )
   }
 }
