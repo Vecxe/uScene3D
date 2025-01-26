@@ -30,6 +30,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 
 @Composable
 fun OptionItem(modifier: Modifier = Modifier, option: OptionModel) {
@@ -45,7 +46,7 @@ fun OptionItem(modifier: Modifier = Modifier, option: OptionModel) {
     )
     Spacer(modifier = Modifier.height(8.dp))
     Text(
-        text = option.text
+        text = option.text,
         fontSize = 15.sp
         )
   }
