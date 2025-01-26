@@ -26,8 +26,13 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.slideInVertically
+import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -131,6 +136,35 @@ class MainActivity : AppCompatActivity(), AndroidFragmentApplication.Callbacks {
             contentDescription = stringResource(R.string.common_word_more),
             colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.onSurface),
           )
+        }
+      }
+      GDXLoadingBox(state)
+    }
+  }
+
+  @Composable
+  fun GDXLoadingBox(state: GDXState) {
+    Box(
+      modifier = Modifier.fillMaxSize(),
+      contentAlignment = Alignment.Center
+    ) {
+      AnimatedVisibility(
+        visible = state.isLoading,
+        enter = slideInVertically(
+          initialOffsetY = { -it },
+          animationSpec = tween(durationMillis = 500)
+        ),
+        exit = slideOutVertically(
+          targetOffsetY = { it },
+          animationSpec = tween(durationMillis = 500)
+        )
+      ) {
+        Surface(
+          modifier = Modifier.size(200.dp),
+          shape = RoundedCornerShape(20.dp),
+          color = MaterialTheme.colorScheme.surfaceContainerHigh,
+        ) {
+          Text(text = stringResource(Strings.text_loading))
         }
       }
     }

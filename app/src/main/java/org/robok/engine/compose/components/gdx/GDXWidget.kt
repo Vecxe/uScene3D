@@ -30,6 +30,12 @@ import org.robok.engine.feature.scene.editor.fragment.LibGDXFragment
 import org.robok.engine.feature.scene.editor.interfaces.ObjectActionListener
 import org.robok.engine.feature.scene.editor.interfaces.ObjectListener
 
+/**
+ * Composable function to render a 3D Fragment.
+ * 
+ * @param modifier The [Modifier] to be applied to the widget.
+ * @param state The [GDXState] object that holds the state and listeners for the widget.
+ */
 @Composable
 fun GDXWidget(modifier: Modifier = Modifier, state: GDXState) {
   val context = LocalContext.current
@@ -38,6 +44,13 @@ fun GDXWidget(modifier: Modifier = Modifier, state: GDXState) {
   AndroidView(factory = { gdxFactory }, modifier = modifier)
 }
 
+/**
+ * Creates and initializes a [FrameLayout] for embedding a Lib GDX 3D fragment.
+ * 
+ * @param context The [Context] in which the FrameLayout will be created.
+ * @param state The [GDXState] object that contains the LibGDX fragment and listeners.
+ * @return The initialized [FrameLayout] containing the LibGDX fragment.
+ */
 private fun setGDXFactory(context: Context, state: GDXState): FrameLayout {
   val frame = FrameLayout(context)
   frame.id = View.generateViewId()
@@ -51,15 +64,33 @@ private fun setGDXFactory(context: Context, state: GDXState): FrameLayout {
 
     fragmentTransaction.replace(frame.id, fragment)
     fragmentTransaction.commit()
+
+    state.isLoading = true
   }
 
   return frame
 }
 
-@Composable fun rememberGDXState() = remember { GDXState() }
 
+/**
+ * Composable function to remember and provide a [GDXState] object.
+ * 
+ * @return A new instance of [GDXState], remembered across recompositions.
+ */
+@Composable
+fun rememberGDXState() = remember { GDXState() }
+
+/**
+ * Holds the state and listeners for the GDX widget and its associated LibGDX fragment.
+ *
+ * @property fragment The [LibGDXFragment] instance managed by this state.
+ * @property objectListener The [ObjectListener] interface to handle LibGDX events.
+ * @property objectActionListener The [ObjectActionListener] interface for object actions.
+ * @property isLoading Indicates is being created or not.
+ */
 data class GDXState(
   var fragment: LibGDXFragment? = null,
   var objectListener: ObjectListener? = null,
   var objectActionListener: ObjectActionListener? = null,
+  var isLoading: Boolean = false
 )
