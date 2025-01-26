@@ -120,6 +120,7 @@ class MainActivity : AppCompatActivity(), AndroidFragmentApplication.Callbacks {
   @Composable
   fun GDXScreen(state: GDXState) {
     Box(modifier = Modifier.fillMaxSize()) {
+      GDXLoadingBox(state)
       GDXWidget(modifier = Modifier.fillMaxSize(), state = state)
 
       ExpandAndShrink(
@@ -146,7 +147,6 @@ class MainActivity : AppCompatActivity(), AndroidFragmentApplication.Callbacks {
           )
         }
       }
-      GDXLoadingBox(state)
     }
   }
 
