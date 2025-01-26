@@ -31,7 +31,7 @@ fun OptionsGrid(modifier: Modifier = Modifier, options: List<OptionModel>) {
   Column(modifier = modifier) {
     rows.forEach { row ->
       Row(
-        horizontalArrangement = Arrangement.spacedBy(16.dp)
+        horizontalArrangement = Arrangement.spacedBy(12.dp)
         // modifier = Modifier.fillMaxWidth()
       ) {
         row.forEach { option -> OptionItem(option = option) }
