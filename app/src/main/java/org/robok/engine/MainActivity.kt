@@ -117,8 +117,8 @@ class MainActivity : AppCompatActivity(), AndroidFragmentApplication.Callbacks {
     Box(modifier = Modifier.fillMaxSize()) {
       GDXWidget(modifier = Modifier.fillMaxSize(), state = state)
 
-      ExpandAndShrink(visible = viewModel.isOptionsOpen, vertically = false) {
-        GDXBox(modifier = Modifier.align(Alignment.TopEnd).padding(16.dp))
+      ExpandAndShrink(modifier = Modifier.align(Alignment.CenterEnd), visible = viewModel.isOptionsOpen, vertically = false) {
+        GDXBox(modifier = Modifier.padding(16.dp))
       }
 
       IconButton(
