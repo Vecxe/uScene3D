@@ -32,9 +32,7 @@ import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -123,11 +121,19 @@ class MainActivity : AppCompatActivity(), AndroidFragmentApplication.Callbacks {
     Box(modifier = Modifier.fillMaxSize()) {
       GDXWidget(modifier = Modifier.fillMaxSize(), state = state)
 
-      ExpandAndShrink(modifier = Modifier.align(Alignment.CenterEnd), visible = gdxViewModelisOptionsOpen, vertically = false) {
+      ExpandAndShrink(
+        modifier = Modifier.align(Alignment.CenterEnd),
+        visible = gdxViewModelisOptionsOpen,
+        vertically = false,
+      ) {
         OptionsBox(modifier = Modifier.padding(10.dp))
       }
 
-      ExpandAndShrink(modifier = Modifier.align(Alignment.TopEnd), visible = !gdxViewModelisOptionsOpen, vertically = false) {
+      ExpandAndShrink(
+        modifier = Modifier.align(Alignment.TopEnd),
+        visible = !gdxViewModelisOptionsOpen,
+        vertically = false,
+      ) {
         IconButton(
           onClick = { gdxViewModelsetOptionsOpen(!gdxViewModelisOptionsOpen) },
           modifier = Modifier.size(80.dp).align(Alignment.TopEnd),
@@ -145,20 +151,13 @@ class MainActivity : AppCompatActivity(), AndroidFragmentApplication.Callbacks {
 
   @Composable
   fun GDXLoadingBox(state: GDXState) {
-    Box(
-      modifier = Modifier.fillMaxSize(),
-      contentAlignment = Alignment.Center
-    ) {
+    Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
       AnimatedVisibility(
         visible = state.isLoading,
-        enter = slideInVertically(
-          initialOffsetY = { -it },
-          animationSpec = tween(durationMillis = 500)
-        ),
-        exit = slideOutVertically(
-          targetOffsetY = { it },
-          animationSpec = tween(durationMillis = 500)
-        )
+        enter =
+          slideInVertically(initialOffsetY = { -it }, animationSpec = tween(durationMillis = 500)),
+        exit =
+          slideOutVertically(targetOffsetY = { it }, animationSpec = tween(durationMillis = 500)),
       ) {
         Surface(
           modifier = Modifier.size(200.dp),

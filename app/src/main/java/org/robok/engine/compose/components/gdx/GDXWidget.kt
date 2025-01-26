@@ -32,7 +32,7 @@ import org.robok.engine.feature.scene.editor.interfaces.ObjectListener
 
 /**
  * Composable function to render a 3D Fragment.
- * 
+ *
  * @param modifier The [Modifier] to be applied to the widget.
  * @param state The [GDXState] object that holds the state and listeners for the widget.
  */
@@ -46,7 +46,7 @@ fun GDXWidget(modifier: Modifier = Modifier, state: GDXState) {
 
 /**
  * Creates and initializes a [FrameLayout] for embedding a Lib GDX 3D fragment.
- * 
+ *
  * @param context The [Context] in which the FrameLayout will be created.
  * @param state The [GDXState] object that contains the LibGDX fragment and listeners.
  * @return The initialized [FrameLayout] containing the LibGDX fragment.
@@ -71,14 +71,12 @@ private fun setGDXFactory(context: Context, state: GDXState): FrameLayout {
   return frame
 }
 
-
 /**
  * Composable function to remember and provide a [GDXState] object.
- * 
+ *
  * @return A new instance of [GDXState], remembered across recompositions.
  */
-@Composable
-fun rememberGDXState() = remember { GDXState() }
+@Composable fun rememberGDXState() = remember { GDXState() }
 
 /**
  * Holds the state and listeners for the GDX widget and its associated LibGDX fragment.
@@ -92,5 +90,5 @@ data class GDXState(
   var fragment: LibGDXFragment? = null,
   var objectListener: ObjectListener? = null,
   var objectActionListener: ObjectActionListener? = null,
-  var isLoading: Boolean = false
+  var isLoading: Boolean = false,
 )
