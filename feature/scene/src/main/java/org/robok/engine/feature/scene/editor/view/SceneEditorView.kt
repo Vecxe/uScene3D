@@ -126,6 +126,8 @@ class SceneEditorView : ApplicationAdapter(), ObjectListener, ObjectActionListen
 
   override fun onPinch(initialPointer1: Vector2, initialPointer2: Vector2, pointer1: Vector2, pointer2: Vector2) = objectListener.onPinch(initialPointer1, initialPointer2, pointer1, pointer2)
 
+  override fun onTouchDown(x: Float, y: Float, count: Int, button: Int) = objectListener.onTouchDown(x, y, count, button)
+
   /************** End **************/
 
   /************** Methods from Object Action Listener **************/
