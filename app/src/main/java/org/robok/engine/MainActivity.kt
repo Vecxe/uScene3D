@@ -117,8 +117,8 @@ class MainActivity : AppCompatActivity(), AndroidFragmentApplication.Callbacks {
     Box(modifier = Modifier.fillMaxSize()) {
       GDXWidget(modifier = Modifier.fillMaxSize(), state = state)
 
-      ExpandAndShrink(modifier = Modifier.align(Alignment.CenterEnd).padding(end = 20.dp), visible = viewModel.isOptionsOpen, vertically = false) {
-        OptionsBox(modifier = Modifier.padding(16.dp))
+      ExpandAndShrink(modifier = Modifier.align(Alignment.CenterEnd), visible = viewModel.isOptionsOpen, vertically = false) {
+        OptionsBox(modifier = Modifier.padding(10.dp))
       }
 
       IconButton(
@@ -142,7 +142,7 @@ class MainActivity : AppCompatActivity(), AndroidFragmentApplication.Callbacks {
       shape = RoundedCornerShape(20.dp),
       color = MaterialTheme.colorScheme.surfaceContainerHigh,
     ) {
-      OptionsGrid(options = options)
+      OptionsGrid(options = options, modifier = Modifier.padding(start = 5.dp, end = 5.dp))
     }
   }
 
