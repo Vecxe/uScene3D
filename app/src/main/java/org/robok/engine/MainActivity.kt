@@ -174,7 +174,7 @@ class MainActivity : AppCompatActivity(), AndroidFragmentApplication.Callbacks {
   @Composable
   fun OptionsBox(modifier: Modifier = Modifier) {
     val context = LocalContext.current
-    val options = getOptions(contexr)
+    val options = getOptions(context)
     Surface(
       modifier = modifier,
       shape = RoundedCornerShape(20.dp),
