@@ -130,9 +130,7 @@ public class CameraInputController2 extends GestureDetector {
     public boolean touchDown(float x, float y, int pointer, int button) {
       previousZoom = 0;
       isZoom = false;
-      /*if(controller.movimentObject != null){
-          controller.movimentObject.handleInput(x,y);
-      }*/
+      objectListener.onTouchDown(x, y, count, button);
       return false;
     }
 
