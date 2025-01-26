@@ -38,7 +38,7 @@ fun OptionItem(modifier: Modifier = Modifier, option: OptionModel) {
   Column(
     horizontalAlignment = Alignment.CenterHorizontally,
     verticalArrangement = Arrangement.Center,
-    modifier = modifier.padding(8.dp).width(70.dp).height(90.dp),
+    modifier = modifier.padding(6.dp).width(70.dp).height(90.dp),
   ) {
     Icon(
       imageVector = option.icon,
