@@ -17,6 +17,7 @@ package org.robok.engine.feature.scene.editor.interfaces
  *   along with Robok.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+import com.badlogic.gdx.math.Vector2
 import org.robok.engine.feature.scene.editor.objects.SceneObject
 
 interface ObjectListener {
