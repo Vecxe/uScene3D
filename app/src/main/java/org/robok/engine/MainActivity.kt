@@ -93,7 +93,6 @@ class MainActivity : AppCompatActivity(), AndroidFragmentApplication.Callbacks {
   fun Screen(savedInstanceState: Bundle?) {
     SideEffect { hideSystemUI() }
     val state = rememberGDXState()
-    GDXLoadingBox(state)
     GDXScreen(state = state)
 
     state.objectListener =
@@ -145,27 +144,6 @@ class MainActivity : AppCompatActivity(), AndroidFragmentApplication.Callbacks {
             contentDescription = stringResource(R.string.common_word_more),
             colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.onSurface),
           )
-        }
-      }
-    }
-  }
-
-  @Composable
-  fun GDXLoadingBox(state: GDXState) {
-    Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-      AnimatedVisibility(
-        visible = state.isLoading,
-        enter =
-          slideInVertically(initialOffsetY = { -it }, animationSpec = tween(durationMillis = 500)),
-        exit =
-          slideOutVertically(targetOffsetY = { it }, animationSpec = tween(durationMillis = 500)),
-      ) {
-        Surface(
-          modifier = Modifier.size(200.dp),
-          shape = RoundedCornerShape(20.dp),
-          color = MaterialTheme.colorScheme.surfaceContainerHigh,
-        ) {
-          Text(text = stringResource(Strings.text_loading))
         }
       }
     }
