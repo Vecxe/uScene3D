@@ -57,7 +57,7 @@ import org.robok.engine.compose.components.gdx.GDXState
 import org.robok.engine.compose.components.gdx.GDXWidget
 import org.robok.engine.compose.components.gdx.rememberGDXState
 import org.robok.engine.compose.components.options.OptionsGrid
-import org.robok.engine.compose.components.options.rememberOptions
+import org.robok.engine.compose.components.options.getOptions
 import org.robok.engine.compose.theme.AppTheme
 import org.robok.engine.feature.scene.editor.interfaces.EmptyObjectActionListener
 import org.robok.engine.feature.scene.editor.interfaces.ObjectListener
@@ -66,7 +66,7 @@ import org.robok.engine.viewmodel.GDXViewModel
 
 class MainActivity : AppCompatActivity(), AndroidFragmentApplication.Callbacks {
 
-  private val viewModel: GDXViewModel by viewModels()
+  private val gdxViewModel: GDXViewModel by viewModels()
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -111,7 +111,7 @@ class MainActivity : AppCompatActivity(), AndroidFragmentApplication.Callbacks {
         ) {}
 
         override fun onTouchDown(x: Float, y: Float, count: Int, button: Int) {
-          viewModel.setOptionsOpen(false)
+          gdxViewModelsetOptionsOpen(false)
         }
       }
     state.objectActionListener = state.fragment?.sceneEditorView ?: EmptyObjectActionListener()
@@ -122,13 +122,13 @@ class MainActivity : AppCompatActivity(), AndroidFragmentApplication.Callbacks {
     Box(modifier = Modifier.fillMaxSize()) {
       GDXWidget(modifier = Modifier.fillMaxSize(), state = state)
 
-      ExpandAndShrink(modifier = Modifier.align(Alignment.CenterEnd), visible = viewModel.isOptionsOpen, vertically = false) {
+      ExpandAndShrink(modifier = Modifier.align(Alignment.CenterEnd), visible = gdxViewModelisOptionsOpen, vertically = false) {
         OptionsBox(modifier = Modifier.padding(10.dp))
       }
 
-      ExpandAndShrink(modifier = Modifier.align(Alignment.TopEnd), visible = !viewModel.isOptionsOpen, vertically = false) {
+      ExpandAndShrink(modifier = Modifier.align(Alignment.TopEnd), visible = !gdxViewModelisOptionsOpen, vertically = false) {
         IconButton(
-          onClick = { viewModel.setOptionsOpen(!viewModel.isOptionsOpen) },
+          onClick = { gdxViewModelsetOptionsOpen(!gdxViewModelisOptionsOpen) },
           modifier = Modifier.size(80.dp).align(Alignment.TopEnd),
         ) {
           Image(
@@ -172,7 +172,8 @@ class MainActivity : AppCompatActivity(), AndroidFragmentApplication.Callbacks {
 
   @Composable
   fun OptionsBox(modifier: Modifier = Modifier) {
-    val options = rememberOptions()
+    val context = LocalContext.current
+    val options = getOptions(contexr)
     Surface(
       modifier = modifier,
       shape = RoundedCornerShape(20.dp),
