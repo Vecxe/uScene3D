@@ -121,10 +121,10 @@ class MainActivity : AppCompatActivity(), AndroidFragmentApplication.Callbacks {
         OptionsBox(modifier = Modifier.padding(10.dp))
       }
 
-      ExpandAndShrink(modifier = Modifier.align(Alignment.CenterEnd), visible = !viewModel.isOptionsOpen, vertically = false) {
+      ExpandAndShrink(modifier = Modifier.align(Alignment.TopEnd), visible = !viewModel.isOptionsOpen, vertically = false) {
         IconButton(
           onClick = { viewModel.setOptionsOpen(!viewModel.isOptionsOpen) },
-          modifier = Modifier.size(70.dp).align(Alignment.TopEnd),
+          modifier = Modifier.size(80.dp).align(Alignment.TopEnd),
         ) {
           Image(
             imageVector = Icons.Rounded.MoreVert,

@@ -17,15 +17,17 @@ package org.robok.engine.compose.components.options
  *   along with Robok.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+import android.content.Context
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Android
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
+import androidx.compose.ui.res.stringResource
+import org.robok.engine.Strings
 
 @Composable
-fun rememberOptions() = remember {
-  listOf(
-    OptionModel(icon = Icons.Rounded.Android, text = "Option 1"),
+fun getOptions(context: Context): List<OptionModel> {
+  return listOf(
+    OptionModel(icon = Icons.Rounded.Add, text = stringResource(Strings.option_add_object)),
     OptionModel(icon = Icons.Rounded.Android, text = "Option 2"),
     OptionModel(icon = Icons.Rounded.Android, text = "Option 3"),
     OptionModel(icon = Icons.Rounded.Android, text = "Option 4"),

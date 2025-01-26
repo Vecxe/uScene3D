@@ -216,4 +216,8 @@
   <string name="setup_development_environment_title">Development Environment</string>
   <string name="setup_development_environment_not_finish">Donwload SDKs First</string>
   <!-- end section -->
+
+  <!-- scene editor options section -->
+  <string name="option_add_object">Add Object</string>
+  <!-- end section -->
 </resources>
