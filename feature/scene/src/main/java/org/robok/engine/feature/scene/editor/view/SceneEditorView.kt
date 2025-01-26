@@ -116,27 +116,34 @@ class SceneEditorView : ApplicationAdapter(), ObjectListener, ObjectActionListen
     HdriToCubemap.convertHdriToCubemap(inputPath, outputPath)
   }
 
-  /************** Methods from Object Listener **************/
+  /** ************ Methods from Object Listener ************* */
+  override fun onTap(x: Float, y: Float, count: Int, button: Int) =
+    objectListener.onTap(x, y, count, button)
 
-  override fun onTap(x: Float, y: Float, count: Int, button: Int) = objectListener.onTap(x, y, count, button)
+  override fun onObjectClick(sceneObject: SceneObject, x: Float, y: Float) =
+    objectListener.onObjectClick(sceneObject, x, y)
 
-  override fun onObjectClick(sceneObject: SceneObject, x: Float, y: Float) =  objectListener.onObjectClick(sceneObject, x, y)
+  override fun onZoom(initialDistance: Float, distance: Float) =
+    objectListener.onZoom(initialDistance, distance)
 
-  override fun onZoom(initialDistance: Float, distance: Float) = objectListener.onZoom(initialDistance, distance)
+  override fun onPinch(
+    initialPointer1: Vector2,
+    initialPointer2: Vector2,
+    pointer1: Vector2,
+    pointer2: Vector2,
+  ) = objectListener.onPinch(initialPointer1, initialPointer2, pointer1, pointer2)
 
-  override fun onPinch(initialPointer1: Vector2, initialPointer2: Vector2, pointer1: Vector2, pointer2: Vector2) = objectListener.onPinch(initialPointer1, initialPointer2, pointer1, pointer2)
+  override fun onTouchDown(x: Float, y: Float, count: Int, button: Int) =
+    objectListener.onTouchDown(x, y, count, button)
 
-  override fun onTouchDown(x: Float, y: Float, count: Int, button: Int) = objectListener.onTouchDown(x, y, count, button)
+  /** ************ End ************* */
 
-  /************** End **************/
+  /** ************ Methods from Object Action Listener ************* */
 
-  /************** Methods from Object Action Listener **************/
+  /** TODO: move object* */
+  override fun onMove(x: Float, y: Float, z: Float) = Unit
 
-  /** TODO: move object**/
-  override fun onMove(x: Float, y: Float, z: Float)  = Unit
-
-  /************** End **************/
-
+  /** ************ End ************* */
   override fun create() {
     init()
     drawingRenderer = DrawingRenderer()

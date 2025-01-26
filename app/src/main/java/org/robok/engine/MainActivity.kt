@@ -42,18 +42,17 @@ import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.backends.android.AndroidFragmentApplication
-import org.robok.engine.compose.theme.AppTheme
+import com.badlogic.gdx.math.Vector2
 import org.robok.engine.compose.components.animation.ExpandAndShrink
 import org.robok.engine.compose.components.gdx.GDXState
 import org.robok.engine.compose.components.gdx.GDXWidget
 import org.robok.engine.compose.components.gdx.rememberGDXState
 import org.robok.engine.compose.components.options.OptionsGrid
 import org.robok.engine.compose.components.options.rememberOptions
+import org.robok.engine.compose.theme.AppTheme
 import org.robok.engine.feature.scene.editor.interfaces.EmptyObjectActionListener
 import org.robok.engine.feature.scene.editor.interfaces.ObjectListener
 import org.robok.engine.feature.scene.editor.objects.SceneObject
@@ -92,18 +91,19 @@ class MainActivity : AppCompatActivity(), AndroidFragmentApplication.Callbacks {
 
     state.objectListener =
       object : ObjectListener {
-        override fun onTap(x: Float, y: Float, count: Int, button: Int) {
+        override fun onTap(x: Float, y: Float, count: Int, button: Int) {}
 
-        }
-        override fun onObjectClick(sceneObject: SceneObject, x: Float, y: Float) {
+        override fun onObjectClick(sceneObject: SceneObject, x: Float, y: Float) {}
 
-        }
-        override fun onZoom(initialDistance: Float, distance: Float) {
+        override fun onZoom(initialDistance: Float, distance: Float) {}
 
-        }
-        override fun onPinch(initialPointer1: Vector2, initialPointer2: Vector2, pointer1: Vector2, pointer2: Vector2) {
+        override fun onPinch(
+          initialPointer1: Vector2,
+          initialPointer2: Vector2,
+          pointer1: Vector2,
+          pointer2: Vector2,
+        ) {}
 
-        }
         override fun onTouchDown(x: Float, y: Float, count: Int, button: Int) {
           viewModel.setOptionsOpen(false)
         }
@@ -127,7 +127,7 @@ class MainActivity : AppCompatActivity(), AndroidFragmentApplication.Callbacks {
         Image(
           imageVector = Icons.Rounded.MoreVert,
           contentDescription = stringResource(R.string.common_word_more),
-          colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.onSurface)
+          colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.onSurface),
         )
       }
     }
@@ -139,7 +139,7 @@ class MainActivity : AppCompatActivity(), AndroidFragmentApplication.Callbacks {
     Surface(
       modifier = modifier,
       shape = RoundedCornerShape(20.dp),
-      color = MaterialTheme.colorScheme.surfaceContainerHigh
+      color = MaterialTheme.colorScheme.surfaceContainerHigh,
     ) {
       OptionsGrid(modifier = modifier, options = options)
     }

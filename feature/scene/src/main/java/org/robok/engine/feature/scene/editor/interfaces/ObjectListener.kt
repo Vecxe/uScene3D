@@ -22,8 +22,17 @@ import org.robok.engine.feature.scene.editor.objects.SceneObject
 
 interface ObjectListener {
   fun onTap(x: Float, y: Float, count: Int, button: Int) = Unit
+
   fun onObjectClick(sceneObject: SceneObject, x: Float, y: Float)
+
   fun onZoom(initialDistance: Float, distance: Float)
-  fun onPinch(initialPointer1: Vector2, initialPointer2: Vector2, pointer1: Vector2, pointer2: Vector2)
+
+  fun onPinch(
+    initialPointer1: Vector2,
+    initialPointer2: Vector2,
+    pointer1: Vector2,
+    pointer2: Vector2,
+  )
+
   fun onTouchDown(x: Float, y: Float, count: Int, button: Int) = Unit
 }
