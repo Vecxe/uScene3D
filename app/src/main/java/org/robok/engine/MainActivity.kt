@@ -93,16 +93,16 @@ class MainActivity : AppCompatActivity(), AndroidFragmentApplication.Callbacks {
     state.objectListener =
       object : ObjectListener {
         override fun onTap(x: Float, y: Float, count: Int, button: Int) {
-          viewModel.setOptionsOpen(false)
+
         }
         override fun onObjectClick(sceneObject: SceneObject, x: Float, y: Float) {
-          // do someting when user click in object
+
         }
         override fun onZoom(initialDistance: Float, distance: Float) {
-          viewModel.setOptionsOpen(false)
+
         }
         override fun onPinch(initialPointer1: Vector2, initialPointer2: Vector2, pointer1: Vector2, pointer2: Vector2) {
-          viewModel.setOptionsOpen(false)
+
         }
         override fun onTouchDown(x: Float, y: Float, count: Int, button: Int) {
           viewModel.setOptionsOpen(false)
