@@ -220,5 +220,7 @@
 
   <!-- scene editor options section -->
   <string name="option_add_object">Add Object</string>
+  <string name="option_add_material">Add Material</string>
+  <string name="option_global_configs">Global Configs</string>
   <!-- end section -->
 </resources>
