@@ -101,7 +101,7 @@ class MainActivity : AppCompatActivity(), AndroidFragmentApplication.Callbacks {
         override fun onZoom(initialDistance: Float, distance: Float) {
           viewModel.setOptionsOpen(false)
         }
-        override fun onPinch(initialPointer1: Vector2, initialPointer2: Vector2, pointer1: Vector2, pointer2: Vector2) = {
+        override fun onPinch(initialPointer1: Vector2, initialPointer2: Vector2, pointer1: Vector2, pointer2: Vector2) {
           viewModel.setOptionsOpen(false)
         }
       }
