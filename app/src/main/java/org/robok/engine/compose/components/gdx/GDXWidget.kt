@@ -65,7 +65,7 @@ private fun setGDXFactory(context: Context, state: GDXState): FrameLayout {
     fragmentTransaction.replace(frame.id, fragment)
     fragmentTransaction.commit()
 
-    state.isLoading = true
+    state.isLoading = false
   }
 
   return frame
@@ -90,5 +90,5 @@ data class GDXState(
   var fragment: LibGDXFragment? = null,
   var objectListener: ObjectListener? = null,
   var objectActionListener: ObjectActionListener? = null,
-  var isLoading: Boolean = false,
+  var isLoading: Boolean = true,
 )
