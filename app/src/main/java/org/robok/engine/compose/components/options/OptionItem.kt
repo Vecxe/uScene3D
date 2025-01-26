@@ -42,12 +42,12 @@ fun OptionItem(modifier: Modifier = Modifier, option: OptionModel) {
     Icon(
       imageVector = option.icon,
       contentDescription = option.text,
-      modifier = Modifier.size(40.dp),
+      modifier = Modifier.size(30.dp),
     )
     Spacer(modifier = Modifier.height(8.dp))
     Text(
         text = option.text,
-        fontSize = 15.sp
+        fontSize = 14.sp
         )
   }
 }
