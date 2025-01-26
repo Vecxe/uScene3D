@@ -115,20 +115,24 @@ class SceneEditorView : ApplicationAdapter(), ObjectListener, ObjectActionListen
     HdriToCubemap.convertHdriToCubemap(inputPath, outputPath)
   }
 
-  // from ObjectListener
-  override fun onTap(x: Float, y: Float, count: Int, button: Int) {
-    /* call ui listener */ objectListener.onTap(x, y, count, button)
-  }
+  /************** Methods from Object Listener **************/
 
-  // from ObjectListener
-  override fun onObjectClick(sceneObject: SceneObject, x: Float, y: Float) {
-    /* call ui listener */ objectListener.onObjectClick(sceneObject, x, y)
-  }
+  override fun onTap(x: Float, y: Float, count: Int, button: Int) = objectListener.onTap(x, y, count, button)
 
-  // from ObjectActionListener
-  override fun onMove(x: Float, y: Float, z: Float) {
-    // todo move object
-  }
+  override fun onObjectClick(sceneObject: SceneObject, x: Float, y: Float) =  objectListener.onObjectClick(sceneObject, x, y)
+
+  override fun onZoom(initialDistance: Float, distance: Float) = objectListener.onZoom(initialDistance, distance)
+
+  override fun onPinch(initialPointer1: Vector2, initialPointer2: Vector2, pointer1: Vector2, pointer2: Vector2) = objectListener.onPinch(initialPointer1, initialPointer2, pointer1, pointer2)
+
+  /************** End **************/
+
+  /************** Methods from Object Action Listener **************/
+
+  /** TODO: move object**/
+  override fun onMove(x: Float, y: Float, z: Float)  = Unit
+
+  /************** End **************/
 
   override fun create() {
     init()
