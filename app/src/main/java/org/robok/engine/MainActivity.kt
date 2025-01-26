@@ -117,7 +117,7 @@ class MainActivity : AppCompatActivity(), AndroidFragmentApplication.Callbacks {
     Box(modifier = Modifier.fillMaxSize()) {
       GDXWidget(modifier = Modifier.fillMaxSize(), state = state)
 
-      ExpandAndShrink(modifier = Modifier.align(Alignment.CenterEnd).padding(end = 5.dp), visible = viewModel.isOptionsOpen, vertically = false) {
+      ExpandAndShrink(modifier = Modifier.align(Alignment.CenterEnd).padding(end = 20.dp), visible = viewModel.isOptionsOpen, vertically = false) {
         OptionsBox(modifier = Modifier.padding(16.dp))
       }
 
