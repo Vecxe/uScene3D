@@ -161,6 +161,20 @@ class MainActivity : AppCompatActivity(), AndroidFragmentApplication.Callbacks {
       OptionsGrid(options = options, modifier = Modifier.padding(start = 5.dp, end = 5.dp))
     }
   }
+  
+  
+  @Composable
+  fun ObjectModelsBox(modifier: Modifier = Modifier) {
+    val context = LocalContext.current
+    val options = getOptions(context)
+    Surface(
+      modifier = Modifier.width(300.dp).height(300.dp).align(Alignment.Center),
+      shape = RoundedCornerShape(20.dp),
+      color = MaterialTheme.colorScheme.surfaceContainerHigh,
+    ) {
+      OptionsGrid(options = options, modifier = Modifier.padding(start = 5.dp, end = 5.dp))
+    }
+  }
 
   override fun exit() {
     finish()
