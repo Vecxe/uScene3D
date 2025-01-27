@@ -29,7 +29,7 @@ import org.robok.engine.Strings
 fun getOptions(context: Context): List<OptionModel> {
   return listOf(
     OptionModel(icon = Icons.Rounded.Add, text = stringResource(Strings.option_add_object)),
-    OptionModel(icon = Icons.Rounded.Deployed_Code, text = stringResource(Strings.option_add_material)),
+    OptionModel(icon = Icons.Rounded.Deployed_code, text = stringResource(Strings.option_add_material)),
     OptionModel(icon = Icons.Rounded.Android, text = stringResource(Strings.option_global_configs)),
     OptionModel(icon = Icons.Rounded.Android, text = "Option 4"),
     OptionModel(icon = Icons.Rounded.Android, text = "Option 5"),
