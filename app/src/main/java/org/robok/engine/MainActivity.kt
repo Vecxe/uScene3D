@@ -168,7 +168,7 @@ class MainActivity : AppCompatActivity(), AndroidFragmentApplication.Callbacks {
     val context = LocalContext.current
     val options = getOptions(context)
     Surface(
-      modifier = Modifier.width(300.dp).height(300.dp).align(Alignment.Center),
+      modifier = Modifier.width(300.dp).height(300.dp),
       shape = RoundedCornerShape(20.dp),
       color = MaterialTheme.colorScheme.surfaceContainerHigh,
     ) {
