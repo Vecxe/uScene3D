@@ -12,9 +12,11 @@ class DrawingRenderer() {
   var progress = 0f
   var animation = true
   var radius = 0f
+  lateinit var camera : PerspectiveCamera
 
   fun start(camera: PerspectiveCamera) {
     // Configura a matriz de projeção do ShapeRenderer
+    this.camera = camera
     shapeRenderer.projectionMatrix = camera.combined
 
     // Inicia o ShapeRenderer
@@ -24,6 +26,28 @@ class DrawingRenderer() {
   fun end() {
     shapeRenderer.end()
   }
+ 
+  //draw direction focused
+  fun drawTargetCross(size: Float) {
+    // Ponto onde a câmera está focada
+    val target = camera.position.cpy().add(camera.direction.cpy().scl(camera.position.dst(0f, 0f, 0f)))
+
+    shapeRenderer.begin(ShapeRenderer.ShapeType.Line)
+
+    // Frente e trás (eixo Z)
+    shapeRenderer.line(target.x - size, target.y, target.z, target.x + size, target.y, target.z) // Horizontal
+    shapeRenderer.line(target.x, target.y - size, target.z, target.x, target.y + size, target.z) // Vertical
+
+    // Direita e esquerda (eixo X)
+    shapeRenderer.line(target.x, target.y, target.z - size, target.x, target.y, target.z + size) // Horizontal
+    shapeRenderer.line(target.x, target.y - size, target.z, target.x, target.y + size, target.z) // Vertical
+
+    // Cima e baixo (eixo Y)
+    shapeRenderer.line(target.x - size, target.y, target.z, target.x + size, target.y, target.z) // Horizontal
+    shapeRenderer.line(target.x, target.y, target.z - size, target.x, target.y, target.z + size) // Vertical
+
+    shapeRenderer.end()
+}
 
   fun grid(width: Float, depth: Float, cellSize: Float, lineThickness: Float) {
 
@@ -88,87 +112,6 @@ class DrawingRenderer() {
         )
       } else {
         shapeRenderer.line(x, centerY, startZ, x, centerY, endZ)
-      }
-      x += cellSize
-    }
-  }
-
-  fun gridWithAnimation(width: Float, depth: Float, cellSize: Float, lineThickness: Float) {
-    var delta = Gdx.graphics.deltaTime
-    progress += delta * 0.5f // Velocidade da animação
-    if (progress > 1f) progress = 1f
-    val centerX = 0f
-    val centerY = 0f
-    val centerZ = 0f
-
-    // Limites do plano
-    val startX = centerX - width / 2
-    val endX = centerX + width / 2
-    val startZ = centerZ - depth / 2
-    val endZ = centerZ + depth / 2
-
-    // Progressão calculada
-    val currentWidth = width * progress
-    val currentDepth = depth * progress
-
-    // Limites intermediários durante a animação
-    val animStartX = centerX - currentWidth / 2
-    val animEndX = centerX + currentWidth / 2
-    val animStartZ = centerZ - currentDepth / 2
-    val animEndZ = centerZ + currentDepth / 2
-
-    shapeRenderer.color = Color.GRAY
-
-    // Desenha linhas horizontais (ao longo do eixo X)
-    var z = animStartZ
-    while (z <= animEndZ) {
-      if (Math.abs(z - centerZ) < cellSize / 2) {
-        // Linha central mais grossa
-        shapeRenderer.line(
-          animStartX,
-          centerY,
-          z - lineThickness / 2,
-          animEndX,
-          centerY,
-          z - lineThickness / 2,
-        )
-        shapeRenderer.line(
-          animStartX,
-          centerY,
-          z + lineThickness / 2,
-          animEndX,
-          centerY,
-          z + lineThickness / 2,
-        )
-      } else {
-        shapeRenderer.line(animStartX, centerY, z, animEndX, centerY, z)
-      }
-      z += cellSize
-    }
-
-    // Desenha linhas verticais (ao longo do eixo Z)
-    var x = animStartX
-    while (x <= animEndX) {
-      if (Math.abs(x - centerX) < cellSize / 2) {
-        // Linha central mais grossa
-        shapeRenderer.line(
-          x - lineThickness / 2,
-          centerY,
-          animStartZ,
-          x - lineThickness / 2,
-          centerY,
-          animEndZ,
-        )
-        shapeRenderer.line(
-          x + lineThickness / 2,
-          centerY,
-          animStartZ,
-          x + lineThickness / 2,
-          centerY,
-          animEndZ,
-        )
-      } else {
-        shapeRenderer.line(x, centerY, animStartZ, x, centerY, animEndZ)
       }
       x += cellSize
     }
