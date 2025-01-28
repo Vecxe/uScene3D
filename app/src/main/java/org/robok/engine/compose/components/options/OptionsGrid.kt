@@ -37,7 +37,7 @@ fun OptionsGrid(
       Row(
         horizontalArrangement = Arrangement.spacedBy(12.dp)
       ) {
-        row.forEach { option -> OptionItem(option = option, onOptionClick = onOptionClick) }
+        row.forEach { optionModel -> OptionItem(optionModel = optionModel, onOptionClick = onOptionClick) }
       }
     }
   }
