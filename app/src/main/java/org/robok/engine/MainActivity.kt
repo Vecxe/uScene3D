@@ -176,7 +176,7 @@ class MainActivity : AppCompatActivity(), AndroidFragmentApplication.Callbacks {
     ) {
       OptionsGrid(
         options = options,
-        modifier = Modifier.padding(start = 5.dp, end = 5.dp)
+        modifier = Modifier.padding(start = 5.dp, end = 5.dp),
         onOptionClick = { optionModel ->
           // do something
         }
