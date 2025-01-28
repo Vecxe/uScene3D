@@ -32,8 +32,6 @@ class DrawingRenderer() {
     // Ponto onde a câmera está focada
     val target = camera.position.cpy().add(camera.direction.cpy().scl(camera.position.dst(0f, 0f, 0f)))
 
-    shapeRenderer.begin(ShapeRenderer.ShapeType.Line)
-
     // Frente e trás (eixo Z)
     shapeRenderer.line(target.x - size, target.y, target.z, target.x + size, target.y, target.z) // Horizontal
     shapeRenderer.line(target.x, target.y - size, target.z, target.x, target.y + size, target.z) // Vertical
@@ -45,8 +43,6 @@ class DrawingRenderer() {
     // Cima e baixo (eixo Y)
     shapeRenderer.line(target.x - size, target.y, target.z, target.x + size, target.y, target.z) // Horizontal
     shapeRenderer.line(target.x, target.y, target.z - size, target.x, target.y, target.z + size) // Vertical
-
-    shapeRenderer.end()
 }
 
   fun grid(width: Float, depth: Float, cellSize: Float, lineThickness: Float) {
