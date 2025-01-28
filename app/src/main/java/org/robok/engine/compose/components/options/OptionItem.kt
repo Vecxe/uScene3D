@@ -29,10 +29,10 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 
 @Composable
 fun OptionItem(modifier: Modifier = Modifier, option: OptionModel) {
@@ -48,12 +48,12 @@ fun OptionItem(modifier: Modifier = Modifier, option: OptionModel) {
     )
     Spacer(modifier = Modifier.height(8.dp))
     Text(
-        text = option.text,
-        fontSize = 13.sp,
-        modifier = Modifier.width(70.dp),
-        textAlign = TextAlign.Center,
-        maxLines = 1,
-        overflow = TextOverflow.Ellipsis
-        )
+      text = option.text,
+      fontSize = 13.sp,
+      modifier = Modifier.width(70.dp),
+      textAlign = TextAlign.Center,
+      maxLines = 1,
+      overflow = TextOverflow.Ellipsis,
+    )
   }
 }
