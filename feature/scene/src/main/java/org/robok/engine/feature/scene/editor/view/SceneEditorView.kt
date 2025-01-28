@@ -167,6 +167,7 @@ class SceneEditorView : ApplicationAdapter(), ObjectListener, ObjectActionListen
     cameraInputController2.updateRenderer(drawingRenderer.shapeRenderer)
 
     drawingRenderer.gridWithCircleAnimation(200f, 200f, 1f, 0.1f)
+    drawingRenderer.drawTargetCross(2f)
     drawingRenderer.drawRotatedSquare(0f, 4.5f, 2f, true)
     drawingRenderer.end()
 
