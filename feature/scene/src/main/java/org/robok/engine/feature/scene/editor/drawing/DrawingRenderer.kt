@@ -29,7 +29,7 @@ class DrawingRenderer() {
  
   //draw direction focused
   fun drawTargetCross(size: Float) {
-    // Ponto onde a câmera está focada
+    // Ponto onde a câmera está focada h
     val target = camera.position.cpy().add(camera.direction.cpy().scl(camera.position.dst(0f, 0f, 0f)))
 
     // Frente e trás (eixo Z)
