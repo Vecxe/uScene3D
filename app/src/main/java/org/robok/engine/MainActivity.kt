@@ -155,7 +155,13 @@ class MainActivity : AppCompatActivity(), AndroidFragmentApplication.Callbacks {
       shape = RoundedCornerShape(20.dp),
       color = MaterialTheme.colorScheme.surfaceContainerHigh,
     ) {
-      OptionsGrid(options = options, modifier = Modifier.padding(start = 5.dp, end = 5.dp))
+      OptionsGrid(
+        options = options,
+        modifier = Modifier.padding(start = 5.dp, end = 5.dp),
+        onOptionClick = { optionModel ->
+          // do something
+        }
+      )
     }
   }
 
@@ -168,7 +174,13 @@ class MainActivity : AppCompatActivity(), AndroidFragmentApplication.Callbacks {
       shape = RoundedCornerShape(20.dp),
       color = MaterialTheme.colorScheme.surfaceContainerHigh,
     ) {
-      OptionsGrid(options = options, modifier = Modifier.padding(start = 5.dp, end = 5.dp))
+      OptionsGrid(
+        options = options,
+        modifier = Modifier.padding(start = 5.dp, end = 5.dp)
+        onOptionClick = { optionModel ->
+          // do something
+        }
+      )
     }
   }
 

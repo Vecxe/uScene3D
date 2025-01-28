@@ -25,16 +25,19 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun OptionsGrid(modifier: Modifier = Modifier, options: List<OptionModel>) {
+fun OptionsGrid(
+  modifier: Modifier = Modifier,
+  options: List<OptionModel>,
+  onOptionClick: (OptionModel) -> Unit
+) {
   val rows = options.chunked(2)
 
   Column(modifier = modifier) {
     rows.forEach { row ->
       Row(
         horizontalArrangement = Arrangement.spacedBy(12.dp)
-        // modifier = Modifier.fillMaxWidth()
       ) {
-        row.forEach { option -> OptionItem(option = option) }
+        row.forEach { option -> OptionItem(option = option, onOptionClick = onOptionClick) }
       }
     }
   }

@@ -20,6 +20,7 @@ package org.robok.engine.compose.components.options
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.clickable
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -35,20 +36,28 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun OptionItem(modifier: Modifier = Modifier, option: OptionModel) {
+fun OptionItem(
+  modifier: Modifier = Modifier,
+  optionModel: OptionModel,
+  onOptionClick: (OptionModel) -> Unit
+) {
   Column(
     horizontalAlignment = Alignment.CenterHorizontally,
     verticalArrangement = Arrangement.Center,
-    modifier = modifier.padding(3.dp).width(75.dp).height(95.dp),
+    modifier = modifier
+      .padding(3.dp)
+      .width(75.dp)
+      .height(95.dp)
+      .clickable { onOptionClick(optionModel) },
   ) {
     Icon(
-      imageVector = option.icon,
-      contentDescription = option.text,
+      imageVector = optionModel.icon,
+      contentDescription = optionModel.text,
       modifier = Modifier.size(30.dp),
     )
     Spacer(modifier = Modifier.height(8.dp))
     Text(
-      text = option.text,
+      text = optionModel.text,
       fontSize = 13.sp,
       modifier = Modifier.width(70.dp),
       textAlign = TextAlign.Center,
