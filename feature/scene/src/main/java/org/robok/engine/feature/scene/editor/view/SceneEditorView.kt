@@ -79,7 +79,7 @@ class SceneEditorView : ApplicationAdapter(), ObjectListener, ObjectActionListen
     cameraState.width = Gdx.graphics.width.toFloat()
     cameraState.height = Gdx.graphics.height.toFloat()
     camera = PerspectiveCamera(cameraState.fov, cameraState.width, cameraState.height)
-    camera.position.set(20f, 20f, 20f)
+    camera.position.set(100f, 100f, 100f)
     camera.lookAt(0f, 0f, 0f)
     camera.near = 1f
     camera.far = 300f
