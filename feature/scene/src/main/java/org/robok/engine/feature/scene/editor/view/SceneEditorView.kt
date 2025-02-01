@@ -65,7 +65,7 @@ class SceneEditorView : ApplicationAdapter(), ObjectListener, ObjectActionListen
 
   lateinit var objectListener: ObjectListener
 
-  private var initOpen = true
+  private var initOpen = false
   
   private fun init() {
     initCamera()
@@ -164,7 +164,7 @@ class SceneEditorView : ApplicationAdapter(), ObjectListener, ObjectActionListen
     
     if(!initOpen){
         focusInPrimaryObject()
-        initOpen = false
+        initOpen = true
     }
 
     Gdx.gl.glEnable(GL30.GL_DEPTH_TEST)
