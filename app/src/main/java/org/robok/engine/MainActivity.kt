@@ -183,7 +183,7 @@ fun FadingTitle(title: String) {
     var isVisible by remember { mutableStateOf(true) }
 
     LaunchedEffect(Unit) {
-        delay(1000)
+        delay(2000)
         isVisible = false
     }
 
@@ -194,9 +194,9 @@ fun FadingTitle(title: String) {
     ) {
         Text(
             text = title,
-            fontSize = 24.sp,
+            fontSize = 25.sp,
             fontWeight = FontWeight.Bold,
-            modifier = Modifier.padding(16.dp)
+            modifier = Modifier.padding(20.dp)
         )
     }
 }
