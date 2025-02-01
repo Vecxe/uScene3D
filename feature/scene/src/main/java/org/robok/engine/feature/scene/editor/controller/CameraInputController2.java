@@ -432,7 +432,7 @@ public class CameraInputController2 extends GestureDetector {
     
   public void focusObject(SceneObject sceneObject){
       this.sceneObject = sceneObject;
-      gestureListener.focusCameraOnObjectWithAnimation(sceneObject, 4);
+      gestureListener.focusCameraOnObjectWithAnimation(sceneObject, 3);
   }
   public void updateRenderer(ShapeRenderer shapeRenderer) {
     // if(this.movimentObject != null){
