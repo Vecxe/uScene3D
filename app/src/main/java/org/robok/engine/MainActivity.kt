@@ -184,7 +184,7 @@ fun FadingTitle(title: String) {
     var isVisible by remember { mutableStateOf(true) }
 
     LaunchedEffect(Unit) {
-        delay(2000)
+        delay(2500)
         isVisible = false
     }
 
