@@ -182,12 +182,13 @@ fun FadingTitle(title: String) {
     var isVisible by remember { mutableStateOf(true) }
 
     LaunchedEffect(Unit) {
-        delay(2000)
+        delay(1000)
         isVisible = false
     }
 
     AnimatedVisibility(
         visible = isVisible,
+        enter = fadeIn(animationSpec = tween(durationMillis = 1000)),
         exit = fadeOut(animationSpec = tween(durationMillis = 1000))
     ) {
         Text(
