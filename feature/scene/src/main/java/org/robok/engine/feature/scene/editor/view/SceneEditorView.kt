@@ -65,6 +65,8 @@ class SceneEditorView : ApplicationAdapter(), ObjectListener, ObjectActionListen
 
   lateinit var objectListener: ObjectListener
 
+  private var initOpen = true
+  
   private fun init() {
     initCamera()
     initSky()
@@ -159,6 +161,11 @@ class SceneEditorView : ApplicationAdapter(), ObjectListener, ObjectActionListen
     sceneManager.render()
 
     onTime()
+    
+    if(!initOpen){
+        focusInPrimaryObject()
+        initOpen = false
+    }
 
     Gdx.gl.glEnable(GL30.GL_DEPTH_TEST)
 
@@ -207,6 +214,10 @@ class SceneEditorView : ApplicationAdapter(), ObjectListener, ObjectActionListen
       invoke(it)
       command = null
     }
+  }
+  
+  private fun focusInPrimaryObject(){
+     cameraInputController2.focusObject(sceneState.objects[0])
   }
 
   private fun renderObjects() {

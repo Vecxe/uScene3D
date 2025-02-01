@@ -258,7 +258,7 @@ public class CameraInputController2 extends GestureDetector {
     }
 
     // Method that animates the camera to the object
-    private void focusCameraOnObjectWithAnimation(SceneObject sceneObject, float durationSeconds) {
+    public void focusCameraOnObjectWithAnimation(SceneObject sceneObject, float durationSeconds) {
       // Get the initial position of the camera
       Vector3 initialPosition = new Vector3(controller.camera.position);
 
@@ -429,7 +429,11 @@ public class CameraInputController2 extends GestureDetector {
       if (autoUpdate) camera.update();
     }
   }
-
+    
+  public void focusObject(SceneObject sceneObject){
+      this.sceneObject = sceneObject;
+      gestureListener.focusCameraOnObjectWithAnimation(sceneObject);
+  }
   public void updateRenderer(ShapeRenderer shapeRenderer) {
     // if(this.movimentObject != null){
     /* for (Arrow arrow : this.movimentObject.getMovimentArrows()) {
