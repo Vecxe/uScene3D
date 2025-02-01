@@ -46,6 +46,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.badlogic.gdx.backends.android.AndroidFragmentApplication
 import com.badlogic.gdx.math.Vector2
@@ -60,6 +61,15 @@ import org.robok.engine.feature.scene.editor.interfaces.EmptyObjectActionListene
 import org.robok.engine.feature.scene.editor.interfaces.ObjectListener
 import org.robok.engine.feature.scene.editor.objects.SceneObject
 import org.robok.engine.viewmodel.GDXViewModel
+
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.core.tween
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Text
+import androidx.compose.runtime.*
+import kotlinx.coroutines.delay
+
 
 class MainActivity : AppCompatActivity(), AndroidFragmentApplication.Callbacks {
 
@@ -91,6 +101,7 @@ class MainActivity : AppCompatActivity(), AndroidFragmentApplication.Callbacks {
     SideEffect { hideSystemUI() }
     val state = rememberGDXState()
     GDXScreen(state = state)
+    FadingTitle("Robok Editor")
 
     state.objectListener =
       object : ObjectListener {
@@ -164,6 +175,28 @@ class MainActivity : AppCompatActivity(), AndroidFragmentApplication.Callbacks {
       )
     }
   }
+
+@Composable
+fun FadingTitle(title: String) {
+    var isVisible by remember { mutableStateOf(true) }
+
+    LaunchedEffect(Unit) {
+        delay(2000)
+        isVisible = false
+    }
+
+    AnimatedVisibility(
+        visible = isVisible,
+        exit = fadeOut(animationSpec = tween(durationMillis = 1000))
+    ) {
+        Text(
+            text = title,
+            fontSize = 24.sp,
+            fontWeight = FontWeight.Bold,
+            modifier = Modifier.padding(16.dp)
+        )
+    }
+}
 
   @Composable
   fun ObjectModelsBox(modifier: Modifier = Modifier) {
