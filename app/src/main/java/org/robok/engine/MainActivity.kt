@@ -44,6 +44,7 @@ import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -196,6 +197,7 @@ fun FadingTitle(title: String) {
             text = title,
             fontSize = 25.sp,
             fontWeight = FontWeight.Bold,
+            color = Color.White,
             modifier = Modifier.padding(20.dp)
         )
     }
