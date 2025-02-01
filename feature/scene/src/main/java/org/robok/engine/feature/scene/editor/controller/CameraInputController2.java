@@ -268,7 +268,7 @@ public class CameraInputController2 extends GestureDetector {
       // targetPosition.z = 0f;
 
       // Define the final position of the camera (slightly offset from the target)
-      float distance = 10f;
+      float distance = 15f;
       Vector3 finalPosition =
           new Vector3(
               targetPosition.x + distance,
